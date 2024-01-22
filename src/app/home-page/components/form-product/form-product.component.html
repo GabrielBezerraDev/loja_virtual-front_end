@@ -1,0 +1,30 @@
+<div class="d-flex align-items-center justify-content-center header-margin padding-container">
+  <form [formGroup]="formProduct" enctype="multipart/form-data" class="d-flex flex-column gap-4 border rounded-3 p-5 border-black">
+    <label for="productImage">
+      <div>
+        <label class="fw-bold">Imagem do Produto</label>
+        <div *ngIf="!isUploadImg" class="place-holder d-flex align-items-center justify-content-center flex-column p-2">
+          <mat-icon>upload_file</mat-icon>
+          <p>Selecione um arquivo</p>
+        </div>
+      </div>
+      <img src="{{fileImg}}" *ngIf="isUploadImg">
+    </label>
+    <input #inputFile (change)="setFile(inputFile)" type="file" id="productImage" e hidden>
+    <div>
+      <label class="fw-bold">Nome do Produto</label>
+      <input class="form-control" type="text" (input)="showForm()" formControlName="name">
+    </div>
+    <div>
+      <label class="fw-bold">Preço do Produto</label>
+      <input class="form-control" type="text" (input)="showForm()" formControlName="price">
+    </div>
+    <div>
+      <label class="fw-bold">Descrição do Produto</label>
+      <textarea class="form-control"(input)="showForm()" formControlName="description"></textarea>
+    </div>
+    <div>
+      <button (click)="postProduct()">Confirmar</button>
+    </div>
+  </form>
+</div>
