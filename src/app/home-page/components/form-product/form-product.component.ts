@@ -1,9 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
 import { IProduct } from '../../interfaces/IProduct';
-import { isEmpty } from 'rxjs';
-import { Multer} from "multer";
+import { ToConvertBase64Service } from '../../../services/to-convert-base64.service';
 
 
 @Component({
@@ -19,12 +18,14 @@ export class FormProductComponent {
   public formProduct = this.formBuilder.group({
     name:["", Validators.required],
     price:["", Validators.required],
-    description:["", Validators.required]
+    description:["", Validators.required],
+    imgBase64:["",Validators.required]
   })
 
   constructor(
     private productsService: ProductsService,
     private formBuilder:FormBuilder,
+    private toConvertBase64Service: ToConvertBase64Service
   ){
 
   }
@@ -42,18 +43,17 @@ export class FormProductComponent {
     if(this.formProduct.valid){
       this.product = this.formProduct.value as unknown as IProduct;
       this.product.price = Number(this.product.price);
+      console.log(this.product);
       this.productsService.postProduct(this.product).subscribe(value => console.log(value));
     }else{
       alert("Conteúdo inválido");
     }
   }
 
-  public setFile(file:HTMLInputElement){
+  public async setFile(file:HTMLInputElement){
     this.isUploadImg = true;
-    let teste:string;
-    let teste2: Multer;
-    console.log((file.files as FileList)[0]);
-    this.fileImg = URL.createObjectURL((file.files as FileList)[0]);
-    console.log(this.fileImg);
+    await this.toConvertBase64Service.toConvertBase64((file.files as FileList)[0])
+    .then(value => this.fileImg = value);
+    this.formProduct.get("imgBase64")?.setValue(this.fileImg);
   }
 }

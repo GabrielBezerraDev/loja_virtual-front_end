@@ -10,7 +10,7 @@
       </div>
       <img src="{{fileImg}}" *ngIf="isUploadImg">
     </label>
-    <input #inputFile (change)="setFile(inputFile)" type="file" id="productImage" e hidden>
+    <input  #inputFile (change)="setFile(inputFile)" type="file" id="productImage" e hidden>
     <div>
       <label class="fw-bold">Nome do Produto</label>
       <input class="form-control" type="text" (input)="showForm()" formControlName="name">
