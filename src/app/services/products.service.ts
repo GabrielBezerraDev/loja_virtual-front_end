@@ -12,8 +12,8 @@ export class ProductsService {
     private httpClient: HttpClientService
   ) { }
 
-  public getAllProducts():Observable<string>{
-    return this.httpClient.get("/products");
+  public getAllProducts():Observable<Array<IProduct>>{
+    return this.httpClient.get<Array<IProduct>>("/products");
   }
 
   public postProduct(body:IProduct):Observable<IProduct>{
