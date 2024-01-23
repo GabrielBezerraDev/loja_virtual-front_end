@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductsService } from '../services/products.service';
 import { HttpClientService } from '../services/http-client.service';
+import { CatalogComponent } from './components/catalog/catalog.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HttpClientService } from '../services/http-client.service';
     PageCategoryComponent,
     PageProductsComponent,
     CardComponent,
-    FormProductComponent
+    FormProductComponent,
+    CatalogComponent
   ],
   imports: [
     CommonModule,

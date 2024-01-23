@@ -3,38 +3,8 @@
     <h1>Categorias</h1>
     <hr>
   </div>
-  <div class="sub-header">
-    <div class="flex-grow-1">
-      <h2>Esporte</h2>
-    </div>
-    <div class="flex-grow-1 gap-3 d-flex justify-content-end ">
-      <mat-icon (click)="navigateTo('new-product')">add_box</mat-icon>
-      <mat-icon>search</mat-icon>
-      <mat-icon>sports_soccer</mat-icon>
-      <input class="form-control w-50">
-    </div>
-  </div>
-  <div class="catalog-exist catalog"></div>
-  <hr>
-  <h2>Equipamentos</h2>
-  <div>
-    <div class="catalog-exist catalog" *ngIf="allProducts.length > 0; else notFounded">
-      <app-card *ngFor="let product of allProducts" [product]="product">
+<app-catalog [productsCategory]="objectCategoryArray">
 
-      </app-card>
-    </div>
-    <<ng-template #notFounded>
-      <div class="catalog-notExist catalog">
-        <mat-icon>warning</mat-icon>
-        <p>Ainda não há produtos cadastrados</p>
-      </div>
-    </ng-template>
-
-  </div>
-  <hr>
-  <h2>Cosmeticos</h2>
-  <div class="catalog-exist catalog"></div>
-  <hr>
-  <h2>Suplementos</h2>
-  <div class="catalog-exist catalog"></div>
+</app-catalog>
 </div>
+

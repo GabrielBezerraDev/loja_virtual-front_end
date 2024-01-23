@@ -1,11 +1,3 @@
-.catalog-category{
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  row-gap: 2.5rem;
-  // background-color: red;
-}
-
 .catalog{
   background: rgb(255, 255, 255);
   border-radius: 20px;
@@ -27,6 +19,7 @@
   align-items: center;
   justify-content: center;
   row-gap: 10px;
+
 }
 
 .sub-header{

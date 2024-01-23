@@ -5,7 +5,7 @@ import { Inject, Injectable, OnInit } from '@angular/core';
 })
 export class ToConvertBase64Service implements OnInit {
 
-  private reader= new FileReader();
+  private reader = new FileReader();
   private textConverted: string = "";
 
   constructor() { }
