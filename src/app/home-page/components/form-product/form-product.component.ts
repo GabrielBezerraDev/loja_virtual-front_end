@@ -40,7 +40,13 @@ export class FormProductComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       this.formType = this.localStorage.getDataLocalStorage("isEditForm");
       this.productsService.getNewCodeProduct().subscribe(value => this.formProduct.get("codeProduct")?.setValue(value));
-      if(this.formType) this.idProduct = this.localStorage.getDataLocalStorage("idProduct");
+      if(this.formType) {
+        this.product = this.localStorage.getDataLocalStorage("bodyProduct");
+        this.idProduct = this.product.id;
+        let currentProduct: Partial<IProduct> = this.product;
+        this.formProduct.patchValue(currentProduct as typeof this.formProduct.value);
+        console.log(this.formProduct.value);
+      };
   }
 
   ngOnDestroy(): void {
@@ -62,10 +68,10 @@ export class FormProductComponent implements OnInit, OnDestroy {
 
   public postProduct():void{
     if(this.formProduct.valid && !this.formType){
-      // this.product = this.formProduct.value as unknown as IProduct;
-      // this.product.price = Number(this.product.price);
-      // console.log(this.product);
-      // this.productsService.postProduct(this.product).subscribe(value => console.log(value));
+      this.product = this.formProduct.value as unknown as IProduct;
+      this.product.price = Number(this.product.price);
+      console.log(this.product);
+      this.productsService.postProduct(this.product).subscribe(value => console.log(value));
     }else{
       alert("teste");
       this.product = this.formProduct.value as unknown as IProduct;

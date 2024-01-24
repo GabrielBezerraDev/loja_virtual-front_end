@@ -17,9 +17,9 @@ export class CardComponent {
     private navigate: NavigateService
   ){}
 
-  public setFormType(value:boolean, id:number):void{
+  public setFormType(value:boolean, product:IProduct):void{
     this.localStorage.setDataLocalStorage("isEditForm",value);
-    this.localStorage.setDataLocalStorage("idProduct",id);
+    this.localStorage.setDataLocalStorage("bodyProduct",product);
   }
 
   public navigateTo(route:string):void{
