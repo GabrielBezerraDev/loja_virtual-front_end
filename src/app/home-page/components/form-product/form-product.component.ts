@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
 import { IProduct } from '../../interfaces/IProduct';
 import { ToConvertBase64Service } from '../../../services/to-convert-base64.service';
 import { ECategorys } from '../../enum/ECategorys';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { IUpdateProducts } from '../../interfaces/IUpdateProducts';
+
 
 
 @Component({
@@ -37,24 +39,66 @@ export class FormProductComponent implements OnInit, OnDestroy {
   ){
   }
 
-  ngOnInit(): void {
-      this.formType = this.localStorage.getDataLocalStorage("isEditForm");
-      this.productsService.getNewCodeProduct().subscribe(value => this.formProduct.get("codeProduct")?.setValue(value));
+  ngOnInit(): void{
+      this.setFormType();
       if(this.formType) {
-        this.product = this.localStorage.getDataLocalStorage("bodyProduct");
-        this.idProduct = this.product.id;
-        let currentProduct: Partial<IProduct> = this.product;
-        this.formProduct.patchValue(currentProduct as typeof this.formProduct.value);
-        console.log(this.formProduct.value);
+        this.setBodyProduct();
+        this.setIdProdcut();
+        this.setFormProduct();
+        this.setImageProduct();
+        this.isUploadImagem(true);
+        return;
       };
+      this.setCodeProduct();
   }
 
   ngOnDestroy(): void {
       this.localStorage.removeDataLocalStorage("isEditForm");
   }
 
-  public test():void{
-    alert("Funcionou");
+  private postForm():void{
+    if(this.formProduct.valid){
+      this.productsService.postProduct(this.product).subscribe(value => console.log(value));
+    }
+  }
+
+  private patchForm():void{
+    this.productsService.patchProduct(this.product,this.idProduct).subscribe(value => console.log(value));
+  }
+
+  private setFormType():void{
+    this.formType = this.localStorage.getDataLocalStorage("isEditForm");
+  }
+
+  private setCodeProduct():void{
+    this.productsService.getNewCodeProduct().subscribe(value => this.formProduct.get("codeProduct")?.setValue(value));
+  }
+
+  private setBodyProduct():void{
+    this.product = this.localStorage.getDataLocalStorage("bodyProduct");
+  }
+
+  private setFormProduct():void{
+    let currentProduct: IUpdateProducts = this.product;
+    this.formProduct.patchValue(currentProduct as typeof this.formProduct.value);
+  }
+
+  private setIdProdcut():void{
+    this.idProduct = this.product.id;
+  }
+
+  private setImageProduct():void{
+    this.fileImg = this.product.imgBase64;
+  }
+
+  private isUploadImagem(value:boolean):void{
+    this.isUploadImg = value;
+  }
+
+  public sendForm():void{
+    this.product = this.formProduct.value as unknown as IProduct;
+    this.product.price = Number(this.product.price);
+    this.formType ? this.postForm() : this.patchForm();
   }
 
   public showForm():void{
@@ -66,24 +110,8 @@ export class FormProductComponent implements OnInit, OnDestroy {
     this.productsService.getAllProducts().subscribe(value => console.log(value));
   }
 
-  public postProduct():void{
-    if(this.formProduct.valid && !this.formType){
-      this.product = this.formProduct.value as unknown as IProduct;
-      this.product.price = Number(this.product.price);
-      console.log(this.product);
-      this.productsService.postProduct(this.product).subscribe(value => console.log(value));
-    }else{
-      alert("teste");
-      this.product = this.formProduct.value as unknown as IProduct;
-      this.product.price = Number(this.product.price);
-      console.log(this.product);
-      let updateProduct: Partial<IProduct> = this.product;
-      this.productsService.patchProduct(updateProduct,this.idProduct).subscribe(value => console.log(value));
-    }
-  }
-
   public async setFile(file:HTMLInputElement){
-    this.isUploadImg = true;
+    this.isUploadImagem(true);
     await this.toConvertBase64Service.toConvertBase64((file.files as FileList)[0])
     .then(value => this.fileImg = value);
     this.formProduct.get("imgBase64")?.setValue(this.fileImg);

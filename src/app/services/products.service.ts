@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientService } from './http-client.service';
 import { Observable } from 'rxjs';
 import { IProduct } from '../home-page/interfaces/IProduct';
+import { IUpdateProducts } from '../home-page/interfaces/IUpdateProducts';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class ProductsService {
     return this.httpClient.post<IProduct>("/products", body);
   }
 
-  public patchProduct(body:Partial<IProduct>, id:number):Observable<Partial<IProduct>>{
-    return this.httpClient.patch<Partial<IProduct>>("/products",body,id);
+  public patchProduct(body:IUpdateProducts, id:number):Observable<IUpdateProducts>{
+    return this.httpClient.patch<IUpdateProducts>("/products",body,id);
   }
 
   public getNewCodeProduct():Observable<string>{
