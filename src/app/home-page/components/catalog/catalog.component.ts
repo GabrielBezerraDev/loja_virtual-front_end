@@ -11,10 +11,6 @@ export class CatalogComponent {
 
 @Input() productsCategory: Array<ICategory> = [];
 
-  constructor(private navigate:NavigateService){}
-
-  public navigateTo(route:string):void{
-    this.navigate.navigateTo(route);
-  }
+  constructor(){}
 
 }

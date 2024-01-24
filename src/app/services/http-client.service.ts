@@ -21,7 +21,12 @@ export class HttpClientService {
     return this.httpClient.get<T>(`${urlBackend}${urlController}`);
   }
 
-  public post<T>(urlController:string, body:IProduct):Observable<T>{
+  public post<T>(urlController:string, body:T):Observable<T>{
     return this.httpClient.post<T>(`${urlBackend}${urlController}`,body);
   }
+
+  public patch<T>(urlController:string, body:T, id:number):Observable<T>{
+    return this.httpClient.patch<T>(`${urlBackend}${urlController}/${id}`,body);
+  }
+
 }

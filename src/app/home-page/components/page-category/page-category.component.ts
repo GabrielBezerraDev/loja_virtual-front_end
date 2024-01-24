@@ -1,10 +1,11 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { AfterContentInit, Component, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { NavigateService } from '../../../services/navigate.service';
 import { ProductsService } from '../../../services/products.service';
 import { IProduct } from '../../interfaces/IProduct';
 import { ECategorys } from '../../enum/ECategorys';
 import { ICategory } from '../../interfaces/ICategory';
+import { LocalStorageService } from '../../../services/local-storage.service';
 
 
 type ObjectCategory = {[k:string]:ICategory};
@@ -44,7 +45,9 @@ export class PageCategoryComponent implements OnInit {
   public objectCategoryArray: Array<ICategory> = [];
 
   constructor(
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private localStorage: LocalStorageService,
+    private navigate:NavigateService
   ){}
 
   ngOnInit(): void {
@@ -78,5 +81,13 @@ export class PageCategoryComponent implements OnInit {
     console.log(this.objectCategory);
     this.objectCategoryArray = Object.values(this.objectCategory);
     console.log(this.objectCategoryArray);
+  }
+
+  public navigateTo(route:string):void{
+    this.navigate.navigateTo(route);
+  }
+
+  public setFormType(value:boolean):void{
+    this.localStorage.setDataLocalStorage("isEditForm",value);
   }
 }

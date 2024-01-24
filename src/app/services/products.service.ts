@@ -20,4 +20,12 @@ export class ProductsService {
     return this.httpClient.post<IProduct>("/products", body);
   }
 
+  public patchProduct(body:Partial<IProduct>, id:number):Observable<Partial<IProduct>>{
+    return this.httpClient.patch<Partial<IProduct>>("/products",body,id);
+  }
+
+  public getNewCodeProduct():Observable<string>{
+    return this.httpClient.get<string>("/products/codeProduct");
+  }
+
 }
