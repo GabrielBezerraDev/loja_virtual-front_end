@@ -25,8 +25,13 @@ export class ProductsService {
     return this.httpClient.patch<IUpdateProducts>("/products",body,id);
   }
 
+  public deleteProduct(id:number):Observable<IProduct>{
+    return this.httpClient.delete<IProduct>("/products",id);
+  }
+
   public getNewCodeProduct():Observable<string>{
     return this.httpClient.get<string>("/products/codeProduct");
   }
+
 
 }

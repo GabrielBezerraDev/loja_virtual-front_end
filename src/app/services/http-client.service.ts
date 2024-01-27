@@ -13,8 +13,8 @@ export class HttpClientService {
     private httpClient: HttpClient
   ) { }
 
-  public delete<T>(urlController:string):Observable<T>{
-    return this.httpClient.delete<T>(`${urlBackend}${urlController}`)
+  public delete<T>(urlController:string, id:number):Observable<T>{
+    return this.httpClient.delete<T>(`${urlBackend}${urlController}/${id}`);
   }
 
   public get<T>(urlController:string):Observable<T>{

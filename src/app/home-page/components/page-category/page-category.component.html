@@ -1,17 +1,22 @@
-<div class="catalog-category header-margin padding-container">
-  <div class="d-flex align-items-center">
-    <div>
-      <h1>Categorias</h1>
+<div *ngIf="spinner">
+  <app-spinner></app-spinner>
+</div>
+<div *ngIf="!spinner" class="catalog-category header-margin padding-container">
+  <div class="d-flex flex-column row-gap-5">
+    <div class="d-flex align-items-center">
+      <div>
+        <h1>Categorias</h1>
+      </div>
+      <div class="flex-grow-1 gap-3 d-flex justify-content-end ">
+        <mat-icon (click)="[navigateTo('new-product'),setFormType(false)]">add_box</mat-icon>
+        <mat-icon>search</mat-icon>
+        <input class="form-control w-50">
+      </div>
+      <hr>
     </div>
-    <div class="flex-grow-1 gap-3 d-flex justify-content-end ">
-      <mat-icon (click)="[navigateTo('new-product'),setFormType(false)]">add_box</mat-icon>
-      <mat-icon>search</mat-icon>
-      <input class="form-control w-50">
-    </div>
-    <hr>
-  </div>
-<app-catalog [productsCategory]="objectCategoryArray">
+    <app-catalog [productsCategory]="objectCategoryArray">
 
-</app-catalog>
+    </app-catalog>
+  </div>
 </div>
 

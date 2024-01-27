@@ -13,6 +13,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductsService } from '../services/products.service';
 import { HttpClientService } from '../services/http-client.service';
 import { CatalogComponent } from './components/catalog/catalog.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CatalogComponent } from './components/catalog/catalog.component';
     CommonModule,
     HomePageRoutingModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers:
   [
