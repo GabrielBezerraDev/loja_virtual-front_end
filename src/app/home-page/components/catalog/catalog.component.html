@@ -1,4 +1,4 @@
-<div class="d-flex flex-column gap-5">
+<div *ngIf="showProducts" class="d-flex flex-column gap-5 ">
   <div class="d-flex flex-column gap-4" *ngFor="let productCategory of showProducts">
     <div class="sub-header">
       <div class="flex-grow-1">
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div>
-      <div class="catalog" *ngIf="productCategory.product.length > 0; else notFounded">
+      <div class="catalog overflow-hidden" *ngIf="productCategory.product.length > 0; else notFounded">
         <div class="catalog-exist">
           <app-card (onDeleteProduct)="deleteProduct($event)" *ngFor="let product of productCategory.product" [product]="product">
 

@@ -1,0 +1,29 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PaginationService {
+
+  public initNumber: number = 1;
+  public rulePagination: number;
+  public genericArray: Array<Array<any>> = [];
+
+  constructor() { }
+
+  public definePagination<T>( rule:number,ArrayElements: Array<T>):Array<T>{
+    if(ArrayElements.length === 0) return [];
+    let tempArray: Array<T> = [];
+    for(let i: number = 0; i < ArrayElements.length; i++){
+      if(!(tempArray.length === rule)){
+        tempArray.push(ArrayElements[i]);
+        if(ArrayElements.length-1 === i) this.genericArray.push([...tempArray]);
+      }else{
+        this.genericArray.push([...tempArray]);
+        tempArray = [];
+        i -= 1;
+      }
+    }
+    return this.genericArray[this.initNumber] as Array<T>;
+  }
+}

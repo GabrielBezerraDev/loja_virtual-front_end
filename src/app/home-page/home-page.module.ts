@@ -14,6 +14,7 @@ import { ProductsService } from '../services/products.service';
 import { HttpClientService } from '../services/http-client.service';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { SharedModule } from '../shared/shared.module';
+import { PaginationService } from '../services/pagination.service';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { SharedModule } from '../shared/shared.module';
   providers:
   [
     NavigateService,
-    ProductsService
+    ProductsService,
+    PaginationService
   ]
 })
 export class HomePageModule { }
