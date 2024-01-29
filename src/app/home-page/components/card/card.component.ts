@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
 import { IProduct } from '../../interfaces/IProduct';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { NavigateService } from '../../../services/navigate.service';
-import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
+// import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
 import { IModal } from '../../../shared/interfaces/IModal';
 
 @Component({
@@ -10,10 +10,11 @@ import { IModal } from '../../../shared/interfaces/IModal';
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
-export class CardComponent {
-  @ViewChild(ModalComponent) modal: ModalComponent;
+export class CardComponent implements AfterViewInit{
+  // @ViewChild(ModalComponent) modal: ModalComponent;
   @Output() onDeleteProduct: EventEmitter<number> = new EventEmitter<number>();
   @Input() product: IProduct;
+  public cardNotification: HTMLElement
   public modalInterface: IModal =
   {
     tittleModal: "Deletar Produto",
@@ -24,8 +25,14 @@ export class CardComponent {
 
   constructor(
     private localStorage: LocalStorageService,
-    private navigate: NavigateService
+    private navigate: NavigateService,
+    private elementRef: ElementRef,
+    private renderer: Renderer2
   ){}
+
+    ngAfterViewInit(): void {
+      this.cardNotification = this.elementRef.nativeElement.querySelector(".notification");
+    }
 
   public setFormType(value:boolean, product:IProduct):void{
     this.localStorage.setDataLocalStorage("isEditForm",value);
@@ -37,11 +44,17 @@ export class CardComponent {
   }
 
   public deleteProduct():void{
-    this.modal.showModal();
+    // this.modal.showModal();
   }
 
   public responseUser(value:boolean):void{
     if(value) this.onDeleteProduct.emit(this.product.id);
+  }
+
+  public cardStatus(value:boolean):void{
+    let opacityValue: number = 0;
+    value ? opacityValue = 1 : opacityValue = 0;
+    this.renderer.setStyle(this.cardNotification, "opacity",`${opacityValue}`);
   }
 
 }

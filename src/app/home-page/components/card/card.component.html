@@ -1,6 +1,9 @@
-<app-modal [modalInterface]="modalInterface" (onResponseUser)="responseUser($event)"></app-modal>
+<!-- <app-modal [modalInterface]="modalInterface" (onResponseUser)="responseUser($event)"></app-modal> -->
 <div class="d-flex card">
-  <img src="{{product.imgBase64}}">
+  <div class=" position-relative" (onStatusHover)="cardStatus($event)" appHoverMouse>
+    <div class="notification">Checar Produto</div>
+    <img src="{{product.imgBase64}}">
+  </div>
   <div class="productDescription d-flex flex-column gap-3">
     <div class="d-flex justify-content-between">
       <div>

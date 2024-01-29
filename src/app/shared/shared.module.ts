@@ -4,6 +4,8 @@ import { ModalComponent } from './components/modal/modal/modal.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { MatIconModule } from '@angular/material/icon';
+import { HoverMouseDirective } from './directive/hover-mouse.directive';
+import { LogoComponent } from './components/logo/logo.component';
 
 
 
@@ -11,7 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
   declarations: [
     ModalComponent,
     SpinnerComponent,
-    PaginationComponent
+    PaginationComponent,
+    LogoComponent,
+    HoverMouseDirective
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
   exports: [
     ModalComponent,
     SpinnerComponent,
-    PaginationComponent
+    PaginationComponent,
+    HoverMouseDirective
   ]
 })
 export class SharedModule { }

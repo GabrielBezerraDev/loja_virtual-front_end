@@ -1,3 +1,23 @@
+@keyframes slideUp{
+  from{
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slideRight{
+  from{
+    transform: translateX(-100%);
+  }
+}
+
+.animation-one{
+  animation: slideUp 1s forwards;
+}
+
+.animation-two{
+  animation: slideRight 1s forwards;
+}
+
 .catalog-category{
   overflow-y: auto;
   display: flex;
@@ -47,4 +67,38 @@ input{
 
 .apresentation{
   background-color: rgba(103, 102, 102, 0.401);
+}
+
+.logo
+{
+  border: 7px solid #ab8315;
+  background-color: #ffff00;
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  padding-left: 5px;
+  margin-top: 16px;
+}
+
+.vl{
+  margin-top: 7px;
+  height: 150px;
+  width: 5px;
+  background-color: #ffffff;
+  flex-shrink: 0;
+}
+
+.marca{
+  color: #1f1f1fec;
+  font-size: 150px;
+  width: 250px;
+  height: 250px;
+}
+
+small{
+  font-size: 1.5rem;
+}
+
+.store-name{
+  font-size: 4rem;
 }
