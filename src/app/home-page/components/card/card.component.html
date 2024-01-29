@@ -6,16 +6,18 @@
       <div>
         <h2 class="fw-bolder">{{product.name}}</h2>
       </div>
-      <div class="d-flex">
-        <mat-icon (click)="[navigateTo('new-product'),setFormType(true,product)]">edit</mat-icon>
-        <mat-icon (click)="[deleteProduct()]">delete</mat-icon>
-      </div>
     </div>
     <div>
       <h2 class="fw-bolder">Preço:</h2>
       <div>R$ {{product.price}}</div>
       <h4 class="fw-bolder">Descrição do Produto:</h4>
       <div>{{product.description}}</div>
+    </div>
+  </div>
+  <div>
+    <div class="footer-card d-flex justify-content-end py-2 pe-3">
+      <mat-icon (click)="[navigateTo('new-product'),setFormType(true,product)]">edit</mat-icon>
+      <mat-icon (click)="[deleteProduct()]">delete</mat-icon>
     </div>
   </div>
 </div>

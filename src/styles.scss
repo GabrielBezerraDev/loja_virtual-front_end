@@ -6,9 +6,12 @@
 
 :root{
   --icon-size: 40px;
+  --main-color: #45373e;
 
  *{
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
  }
 
  .header-margin{

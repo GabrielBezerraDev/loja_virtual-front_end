@@ -1,5 +1,6 @@
-<div class="w-100 h-25 p-3 bg-warning d-flex justify-content-between">
-  <mat-icon>arrow_back_ios</mat-icon>
-  <p class="fw-bolder fs-2">{{paginationNumber}}</p>
-  <mat-icon>arrow_forward_ios</mat-icon>
+<div class="pagination pt-3 px-3 border-top position-relative">
+
+    <mat-icon *ngIf="paginationNumber > 0"  class="left ps-3 text-white rounded-circle d-flex align-content-center justify-content-center bg-black" (click)="minusIndexPagination()">arrow_back_ios</mat-icon>
+    <p class="indexNumber fw-bolder fs-2">{{paginationNumber+1}}</p>
+    <mat-icon *ngIf="paginationNumber < (maxIndexPagination-1)"  class="right ps-1 text-white rounded-circle d-flex align-content-center justify-content-center bg-black" (click)="sumIndexPagination()">arrow_forward_ios</mat-icon>
 </div>

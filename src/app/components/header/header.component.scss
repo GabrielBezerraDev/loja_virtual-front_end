@@ -1,9 +1,45 @@
 header{
   width: 100vw;
   height: 8vh;
-  background-color: rgb(34, 82, 211);
-  padding: 20px;
+  background-color: var(--main-color);
+  // padding: 20px;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 3;
+}
+
+// p{
+//   width: 100px;
+// }
+
+.logo
+{
+  border: 3px solid #ab8315;
+  background-color: #ffff00;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding-left: 5px;
+  margin-top: 16px;
+}
+
+// .vl{
+//   height: 60px;
+//   width: 5px;
+//   background-color: #000000;
+//   position: absolute;
+//   left: 72px;
+//   top: 7px;
+// }
+
+.vl{
+  margin-top: 7px;
+  height: 60px;
+  width: 5px;
+  background-color: #ffffff;
+  flex-shrink: 0;
+}
+
+mat-icon{
+  color: #1f1f1fec;
 }

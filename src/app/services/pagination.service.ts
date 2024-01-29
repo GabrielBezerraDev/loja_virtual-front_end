@@ -5,13 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class PaginationService {
 
-  public initNumber: number = 1;
   public rulePagination: number;
   public genericArray: Array<Array<any>> = [];
 
   constructor() { }
 
-  public definePagination<T>( rule:number,ArrayElements: Array<T>):Array<T>{
+  public definePagination<T>( rule:number,ArrayElements: Array<T>):Array<Array<T>>{
     if(ArrayElements.length === 0) return [];
     let tempArray: Array<T> = [];
     for(let i: number = 0; i < ArrayElements.length; i++){
@@ -24,6 +23,9 @@ export class PaginationService {
         i -= 1;
       }
     }
-    return this.genericArray[this.initNumber] as Array<T>;
+    console.log(this.genericArray);
+    let teste: Array<Array<T>> = [...this.genericArray] as Array<Array<T>>;
+    this.genericArray = [];
+    return teste;
   }
 }

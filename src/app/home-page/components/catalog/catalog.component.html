@@ -1,24 +1,26 @@
 <div *ngIf="showProducts" class="d-flex flex-column gap-5 ">
-  <div class="d-flex flex-column gap-4" *ngFor="let productCategory of showProducts">
-    <div class="sub-header">
-      <div class="flex-grow-1">
-        <h2>{{productCategory.categoryName}}</h2>
-      </div>
-      <div class="flex-grow-1 gap-3 d-flex justify-content-end ">
-        <mat-icon>add_box</mat-icon>
-        <mat-icon>search</mat-icon>
-        <mat-icon>sports_soccer</mat-icon>
-        <input class="form-control w-50">
-      </div>
-    </div>
+  <div class="d-flex flex-column gap-4" *ngFor="let productCategory of productsCategory">
+
     <div>
       <div class="catalog overflow-hidden" *ngIf="productCategory.product.length > 0; else notFounded">
+        <div class="sub-header px-4 pt-5">
+          <div class="flex-grow-1">
+            <h2>{{productCategory.categoryName}}</h2>
+          </div>
+          <div class="flex-grow-1 gap-3 d-flex justify-content-end ">
+            <mat-icon>add_box</mat-icon>
+            <mat-icon>search</mat-icon>
+            <mat-icon>sports_soccer</mat-icon>
+            <input class="form-control w-50">
+          </div>
+        </div>
+        <hr>
         <div class="catalog-exist">
-          <app-card (onDeleteProduct)="deleteProduct($event)" *ngFor="let product of productCategory.product" [product]="product">
+          <app-card (onDeleteProduct)="deleteProduct($event)" *ngFor="let product of teste2[productCategory.categoryName][sections[productCategory.categoryName]]" [product]="product">
 
           </app-card>
         </div>
-        <app-pagination></app-pagination>
+        <app-pagination (onUpdatePainationNumber)="updatePagination($event)" [indexFrom]="productCategory.categoryName" [maxIndexPagination]="teste2[productCategory.categoryName].length"></app-pagination>
       </div>
       <ng-template #notFounded>
         <div class="catalog-notExist catalog">

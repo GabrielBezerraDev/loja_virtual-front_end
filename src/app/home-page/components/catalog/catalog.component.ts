@@ -1,9 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterContentInit,ViewChild } from '@angular/core';
 import { ICategory } from '../../interfaces/ICategory';
 import { ProductsService } from '../../../services/products.service';
-import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
 import { PaginationService } from '../../../services/pagination.service';
+import { IProduct } from '../../interfaces/IProduct';
+import { IUpdatePagination } from '../../interfaces/IUpdatePagionation';
 
+type test = {[k:string]:number}
+type test2 = {[k:string]:Array<Array<IProduct>>}
 
 @Component({
   selector: 'app-catalog',
@@ -11,9 +14,11 @@ import { PaginationService } from '../../../services/pagination.service';
   styleUrl: './catalog.component.scss'
 })
 export class CatalogComponent implements OnInit {
-
 @Input() productsCategory: Array<ICategory> = [];
+public indexPagination: number = 1;
 public showProducts: Array<ICategory> = [];
+public sections: test = {};
+public teste2: test2 = {};
 
 
   constructor(
@@ -27,17 +32,17 @@ public showProducts: Array<ICategory> = [];
   }
 
   ngOnInit(): void {
-    this.showProducts = [ ...this.productsCategory ];
-    console.log(this.showProducts);
     for(let i:number = 0; i < this.productsCategory.length; i++){
-      console.log(this.pagination.definePagination(2,this.productsCategory[i].product));
-      this.showProducts[i].product = this.pagination.definePagination(2,this.productsCategory[i].product);
-      // console.log(this.productsCategory[i].product);
+      this.sections[this.productsCategory[i].categoryName as keyof test] = 0;
+      this.teste2[this.productsCategory[i].categoryName as keyof test] =  (this.pagination.definePagination(6,this.productsCategory[i].product));
     }
-    console.log(this.showProducts);
   }
 
   public deleteProduct(id:number):void{
     this.productsService.deleteProduct(id).subscribe(value => console.log(value));
+  }
+
+  public updatePagination(update:IUpdatePagination):void{
+    this.sections[update.category] = update.index;
   }
 }

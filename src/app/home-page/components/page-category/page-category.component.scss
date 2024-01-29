@@ -2,6 +2,11 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  background-color: var(--main-color);
+}
+
+input{
+  width: 40%;
 }
 
 .catalog{
@@ -30,4 +35,16 @@
 .sub-header{
   display: flex;
   justify-content: space-between;
+}
+
+.category-header{
+  top: 70px;
+  position: sticky;
+  background-color: white;
+  z-index: 2;
+  border-bottom: 1px solid black;
+}
+
+.apresentation{
+  background-color: rgba(103, 102, 102, 0.401);
 }

@@ -69,11 +69,12 @@ export class PageCategoryComponent implements OnInit {
     for(let i: number = 0; i < this.enumsCategory.length; i++){
       for(let j: number = 0; j < this.allProducts.length; j++){
         if((this.enumsCategory[i] as string) === this.allProducts[j].category){
-          this.objectCategory[this.enumsCategory[i] as keyof ObjectCategory].product.push(this.allProducts[j]);
+          (this.objectCategory[this.enumsCategory[i] as keyof ObjectCategory].product as Array<IProduct>).push(this.allProducts[j]);
         }
       }
     }
     this.objectCategoryArray = Object.values(this.objectCategory);
+    // console.log(this.objectCategoryArray);
   }
 
   public navigateTo(route:string):void{

@@ -1,22 +1,30 @@
 <div *ngIf="spinner">
   <app-spinner></app-spinner>
 </div>
-<div *ngIf="!spinner" class="catalog-category header-margin padding-container">
-  <div class="d-flex flex-column row-gap-5">
-    <div class="d-flex align-items-center">
+<div *ngIf="!spinner">
+  <div class="d-flex position-relative">
+    <div class="apresentation d-flex height position-absolute h-100 w-100"></div>
+    <img src="/assets/imgs/Sport.jpg" width="100%">
+  </div>
+  <div class="position-relative d-flex align-items-start flex-column ">
+    <div class="category-header d-flex align-items-center p-3 w-100 ">
       <div>
         <h1>Categorias</h1>
       </div>
       <div class="flex-grow-1 gap-3 d-flex justify-content-end ">
         <mat-icon (click)="[navigateTo('new-product'),setFormType(false)]">add_box</mat-icon>
         <mat-icon>search</mat-icon>
-        <input class="form-control w-50">
+        <input class="form-control">
       </div>
       <hr>
     </div>
-    <app-catalog [productsCategory]="objectCategoryArray">
+    <div class="catalog-category padding-container">
+      <div class="d-flex flex-column row-gap-5">
+        <app-catalog [productsCategory]="objectCategoryArray">
 
-    </app-catalog>
+        </app-catalog>
+      </div>
+    </div>
   </div>
 </div>
 
