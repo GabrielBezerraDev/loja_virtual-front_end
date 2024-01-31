@@ -15,4 +15,8 @@ export class NavigateService {
   public navigateTo(route:string):void{
     this.route.navigate([route]);
   }
+
+  public navigateURL(route:string){
+    this.route.navigateByUrl(route);
+  }
 }

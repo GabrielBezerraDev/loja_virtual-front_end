@@ -57,9 +57,11 @@ export class PageCategoryComponent implements OnInit {
   private getAllProducts():Promise<Array<IProduct>>{
     return new Promise((resolve, rejects) => {
       this.productsService.getAllProducts()
-      .subscribe(products => {
-        this.allProducts = products;
-        resolve(this.allProducts);
+      .subscribe({
+        next: products => {
+          this.allProducts = products;
+          resolve(this.allProducts);
+        }
       });
     })
   }

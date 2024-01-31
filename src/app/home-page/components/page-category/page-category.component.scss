@@ -10,6 +10,17 @@
   }
 }
 
+*{
+  --marca-width: 250px;
+  --marca-height: 250px;
+  --size-icon: 150px;
+  --small-font: 1.5rem;
+  --logo-width: 140px;
+  --logo-height: 140px;
+  --vl-height:  150px;
+}
+
+
 .animation-one{
   animation: slideUp 1s forwards;
 }
@@ -18,11 +29,24 @@
   animation: slideRight 1s forwards;
 }
 
+.input-search{
+  width: 60%;
+}
+
+.search{
+  margin-left: 8px;
+}
+
 .catalog-category{
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   background-color: var(--main-color);
+  width: 100%;
+}
+
+.add-product{
+  cursor: pointer;
 }
 
 input{
@@ -35,34 +59,14 @@ input{
   box-shadow: 2px 2px 6px;
 }
 
-.catalog-exist{
-  flex-shrink: 0;
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  padding: 1.5rem;
-  gap: 30px;
-}
-
-.catalog-notExist{
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 10px;
-}
-
-.sub-header{
-  display: flex;
-  justify-content: space-between;
-}
-
 .category-header{
-  top: 70px;
+  top: 67px;
   position: sticky;
   background-color: white;
   z-index: 2;
   border-bottom: 1px solid black;
+  width: 100%;
+  min-width: 100%;
 }
 
 .apresentation{
@@ -74,15 +78,15 @@ input{
   border: 7px solid #ab8315;
   background-color: #ffff00;
   border-radius: 50%;
-  width: 140px;
-  height: 140px;
+  width: var(--logo-width);
+  height: var(--logo-height);
   padding-left: 5px;
   margin-top: 16px;
 }
 
 .vl{
   margin-top: 7px;
-  height: 150px;
+  height: var(--vl-height);
   width: 5px;
   background-color: #ffffff;
   flex-shrink: 0;
@@ -90,9 +94,9 @@ input{
 
 .marca{
   color: #1f1f1fec;
-  font-size: 150px;
-  width: 250px;
-  height: 250px;
+  font-size: var(--size-icon);
+  width: var(--marca-width);
+  height: var(--marca-height);
 }
 
 small{
@@ -101,4 +105,48 @@ small{
 
 .store-name{
   font-size: 4rem;
+}
+
+@media (max-width: 1030px){
+  mat-icon{
+    margin-top: 5px;
+  }
+
+  .search{
+    margin-top: 12px !important;
+  }
+}
+
+@media (max-width: 800px){
+  .store-name{
+    font-size: 3rem;
+  }
+
+  small{
+    font-size: 1.4rem;
+  }
+
+  *{
+    --logo-width: 100px;
+    --logo-height: 100px;
+    --size-icon: 100px;
+    --vl-height: 100px;
+  }
+}
+
+@media (max-width: 600px){
+  .store-name{
+    font-size: 2rem;
+  }
+
+  small{
+    font-size: 1.3rem;
+  }
+
+  *{
+    --logo-width: 80px;
+    --logo-height: 80px;
+    --size-icon: 80px;
+    --vl-height: 80px;
+  }
 }

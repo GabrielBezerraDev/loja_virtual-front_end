@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
 import { IProduct } from '../../interfaces/IProduct';
@@ -6,6 +6,11 @@ import { ToConvertBase64Service } from '../../../services/to-convert-base64.serv
 import { ECategorys } from '../../enum/ECategorys';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { IUpdateProducts } from '../../interfaces/IUpdateProducts';
+import { NavigateService } from '../../../services/navigate.service';
+import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
+import { IModal } from '../../../shared/interfaces/IModal';
+import { rejects } from 'assert';
+import { Observable, delay } from 'rxjs';
 
 
 
@@ -16,12 +21,22 @@ import { IUpdateProducts } from '../../interfaces/IUpdateProducts';
 })
 export class FormProductComponent implements OnInit, OnDestroy {
 
+  @ViewChild(ModalComponent) modal: ModalComponent;
+
   private product: IProduct;
   private formType: boolean;
+  public hideButtonModal: boolean = true;
   public idProduct:number;
   public enumsCategory: Array<ECategorys> = Object.values(ECategorys);
   public isUploadImg: boolean = false;
   public fileImg:string;
+  public modalInterface: IModal =
+  {
+    tittleModal: "",
+    bodyModal: "",
+    buttonLeftTittle: "",
+    buttonRightTittle: ""
+  };
   public formProduct = this.formBuilder.group({
     name:["", Validators.required],
     price:["", Validators.required],
@@ -34,6 +49,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
   constructor(
     private productsService: ProductsService,
     private localStorage: LocalStorageService,
+    private navigate: NavigateService,
     private formBuilder:FormBuilder,
     private toConvertBase64Service: ToConvertBase64Service
   ){
@@ -56,14 +72,51 @@ export class FormProductComponent implements OnInit, OnDestroy {
       this.localStorage.removeDataLocalStorage("isEditForm");
   }
 
-  private postForm():void{
+  private async postForm():Promise<void>{
     if(this.formProduct.valid){
-      this.productsService.postProduct(this.product).subscribe(value => console.log(value));
+      this.productsService.postProduct(this.product).subscribe({
+        next: () => this.redirectPageCategory()
+      });
     }
   }
 
-  private patchForm():void{
-    this.productsService.patchProduct(this.product,this.idProduct).subscribe(value => console.log(value));
+  private async patchForm():Promise<void>{
+    await new Promise((resolve,reject) =>
+    {
+      this.productsService.patchProduct(this.product,this.idProduct)
+      .subscribe({
+        next: () =>
+        {
+          resolve(
+            this.setModalInterface
+            ({
+              tittleModal: "Atualizado com sucesso!",
+              bodyModal: `O produto \"${this.product.name}\" foi atualizado com sucesso`,
+              buttonRightTittle: "Fechar",
+              buttonLeftTittle: ""
+            })
+          );
+
+        },
+        error: () =>
+        {
+        reject(
+          this.setModalInterface
+          ({
+            tittleModal: "Algo deu errado...",
+            bodyModal: `Não foi possível atualizar o produto \"${this.product.name}\", por favor, tente novamente`,
+            buttonRightTittle: "Fechar",
+            buttonLeftTittle: ""
+          })
+          );
+        }
+      });
+    })
+    console.log(this.modalInterface);
+  }
+
+  private setModalInterface(modalInterface: IModal):void{
+    this.modalInterface = modalInterface;
   }
 
   private setFormType():void{
@@ -71,7 +124,10 @@ export class FormProductComponent implements OnInit, OnDestroy {
   }
 
   private setCodeProduct():void{
-    this.productsService.getNewCodeProduct().subscribe(value => this.formProduct.get("codeProduct")?.setValue(value));
+    this.productsService.getNewCodeProduct()
+    .subscribe({
+      next: value => this.formProduct.get("codeProduct")?.setValue(value)
+    });
   }
 
   private setBodyProduct():void{
@@ -95,10 +151,18 @@ export class FormProductComponent implements OnInit, OnDestroy {
     this.isUploadImg = value;
   }
 
-  public sendForm():void{
+  private redirectPageCategory():void{
+    this.navigate.navigateURL("page-category");
+  }
+
+  private showModal():void{
+    this.modal.showModal();
+  }
+
+  public async sendForm():Promise<void>{
     this.product = this.formProduct.value as unknown as IProduct;
     this.product.price = Number(this.product.price);
-    this.formType ? this.postForm() : this.patchForm();
+    this.formType ? [await this.patchForm(), this.showModal() ] : this.postForm();
   }
 
   public showForm():void{
@@ -107,7 +171,10 @@ export class FormProductComponent implements OnInit, OnDestroy {
   }
 
   public showResponse():void{
-    this.productsService.getAllProducts().subscribe(value => console.log(value));
+    this.productsService.getAllProducts()
+    .subscribe({
+      next: value => console.log(value)
+    });
   }
 
   public async setFile(file:HTMLInputElement){

@@ -1,6 +1,12 @@
+*{
+  --height-img: 400px;
+  --width-img: 100%;
+  --card-border-radius:20px;
+}
+
 .card{
   border: 1px solid black;
-  border-radius: 20px;
+  border-radius: var(--card-border-radius);
   transition: 0.5s transform;
   overflow: hidden;
 
@@ -23,8 +29,8 @@
 
 img
 {
-  width: 100%;
-  height: 400px;
+  width: var(--width-img);
+  height: var(--height-img);
   border-bottom: 1px solid #000000;
   cursor: pointer;
 }
@@ -41,5 +47,51 @@ img
   opacity: 0;
   transition: opacity 0.4s;
 }
+
+@media (max-width: 890px){
+  *{
+    --height-img: 300px;
+  }
+}
+
+
+@media (max-width: 735px){
+  *{
+    --height-img: 280px;
+  }
+}
+
+@media (max-width: 700px){
+  *{
+    --height-img: 260px;
+    --card-border-radius: 0px;
+  }
+}
+
+
+@media (max-width: 550px){
+  *{
+    --height-img: 170px;
+  }
+}
+
+@media (max-width: 470px){
+  *{
+    --height-img: 360px;
+  }
+}
+
+@media (max-width: 400px){
+  *{
+    --height-img: 260px;
+  }
+}
+
+@media (max-width: 300px){
+  *{
+    --height-img: 200px;
+  }
+}
+
 
 

@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="!spinner">
   <div class="d-flex position-relative">
-    <div class="apresentation g-3 d-flex align-items-center justify-content-center position-absolute h-100 w-100">
+    <div class="apresentation gap-3 d-flex align-items-center justify-content-center position-absolute h-100 w-100">
       <div class="d-flex gap-4">
         <div class="d-flex gap-4 overflow-hidden">
           <div class="animation-one d-flex gap-4">
@@ -23,22 +23,27 @@
         </div>
       </div>
     </div>
-    <img src="/assets/imgs/Sport.jpg" width="100%">
+    <img class="header-margin" src="/assets/imgs/Sport.jpg" width="100%">
   </div>
-  <div class="position-relative d-flex align-items-start flex-column ">
-    <div class="category-header d-flex align-items-center p-3 w-100 ">
-      <div>
+  <div class="w-100 position-relative d-flex align-items-start flex-column">
+    <div class="w-100 category-header d-flex justify-content-center align-items-center p-3 ">
+      <div class=" flex-grow-1">
         <h1>Categorias</h1>
       </div>
-      <div class="flex-grow-1 gap-3 d-flex justify-content-end ">
-        <mat-icon (click)="[navigateTo('new-product'),setFormType(false)]">add_box</mat-icon>
-        <mat-icon>search</mat-icon>
-        <input class="form-control">
+      <div class="flex-grow-1 gap-3 d-flex justify-content-end">
+        <div class="add-product bg-black rounded-2 p-1 mt-2 d-flex align-content-center justify-content-center gap-1" (click)="[navigateTo('new-product'),setFormType(false)]">
+          <mat-icon class="text-white">add_box</mat-icon>
+          <p class="p-1 fs-5 fw-bolder text-white">Adicionar Produto</p>
+        </div>
+        <div class="flex-grow-1 d-flex position-relative">
+          <mat-icon class="search mt-2 position-absolute">search</mat-icon>
+          <input class="ps-5 form-control w-100">
+        </div>
       </div>
       <hr>
     </div>
-    <div class="catalog-category padding-container">
-      <div class="d-flex flex-column row-gap-5">
+    <div class="w-100 catalog-category">
+      <div class="d-flex flex-column row-gap-5 overflow-x-hidden padding-container">
         <app-catalog [productsCategory]="objectCategoryArray">
 
         </app-catalog>
@@ -46,4 +51,5 @@
     </div>
   </div>
 </div>
+
 

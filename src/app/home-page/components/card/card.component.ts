@@ -4,6 +4,8 @@ import { LocalStorageService } from '../../../services/local-storage.service';
 import { NavigateService } from '../../../services/navigate.service';
 // import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
 import { IModal } from '../../../shared/interfaces/IModal';
+import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
+import { WindowUtilsService } from '../../../services/window-utils.service';
 
 @Component({
   selector: 'app-card',
@@ -11,7 +13,7 @@ import { IModal } from '../../../shared/interfaces/IModal';
   styleUrl: './card.component.scss'
 })
 export class CardComponent implements AfterViewInit{
-  // @ViewChild(ModalComponent) modal: ModalComponent;
+  @ViewChild(ModalComponent) modal: ModalComponent;
   @Output() onDeleteProduct: EventEmitter<number> = new EventEmitter<number>();
   @Input() product: IProduct;
   public cardNotification: HTMLElement
@@ -27,7 +29,8 @@ export class CardComponent implements AfterViewInit{
     private localStorage: LocalStorageService,
     private navigate: NavigateService,
     private elementRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private windowUtilsService: WindowUtilsService
   ){}
 
     ngAfterViewInit(): void {
@@ -44,11 +47,14 @@ export class CardComponent implements AfterViewInit{
   }
 
   public deleteProduct():void{
-    // this.modal.showModal();
+    this.modal.showModal();
   }
 
   public responseUser(value:boolean):void{
-    if(value) this.onDeleteProduct.emit(this.product.id);
+    if(value) {
+      this.onDeleteProduct.emit(this.product.id);
+      this.windowUtilsService.reloadPage();
+    }
   }
 
   public cardStatus(value:boolean):void{

@@ -15,6 +15,7 @@ import { HttpClientService } from '../services/http-client.service';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { SharedModule } from '../shared/shared.module';
 import { PaginationService } from '../services/pagination.service';
+import { WindowUtilsService } from '../services/window-utils.service';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { PaginationService } from '../services/pagination.service';
   [
     NavigateService,
     ProductsService,
-    PaginationService
+    PaginationService,
+    WindowUtilsService
   ]
 })
 export class HomePageModule { }

@@ -13,7 +13,8 @@ import { IModal } from '../../../interfaces/IModal';
 export class ModalComponent implements AfterViewInit{
 
   @Output() onResponseUser: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() modalInterface: IModal;
+  @Input() modalInterface: Partial<IModal>;
+  @Input() hideButton = false;
 
   public modal: bootstrap.Modal;
 
@@ -30,6 +31,7 @@ export class ModalComponent implements AfterViewInit{
   }
 
   public responseUser(value:boolean):void{
+    this.modal.hide();
     this.onResponseUser.emit(value);
   }
 

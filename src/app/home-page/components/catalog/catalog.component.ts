@@ -39,7 +39,9 @@ public teste2: test2 = {};
   }
 
   public deleteProduct(id:number):void{
-    this.productsService.deleteProduct(id).subscribe(value => console.log(value));
+    this.productsService.deleteProduct(id).subscribe({
+      next: value => console.log(value)
+    });
   }
 
   public updatePagination(update:IUpdatePagination):void{
