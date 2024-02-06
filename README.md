@@ -14,6 +14,10 @@ Considerado que você já tenha feito as etapas do Back-end, para rodar o Front-
 2. Entre na pasta do projeto.
 3. Após isso, no terminal do projeto, execute o comando `npm install` para instalar as dependências necessárias.
 4. Por fim, execute o comando `npm run start` para iniciar o projeto.
+
+> [!WARNING]
+> Se o terminal acusar um erro relacionado com **ng cli**, instale ng cli do angular com o comando `npm i @angular/cli`.
+
 Por padrão, o projeto é executado na Porta 4200 (porta padrão das aplicações angular). Então, acessando a página [localhost:4200](http://localhost:4200), deverá aparece está landing page de produtos:
 
    ![PageGif](/src/assets/gif/PageNunes.gif)
