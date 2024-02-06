@@ -1,27 +1,19 @@
-# BestMindFrontEnd
+# Desafio Best Minds
+Este projeto destina-se ao processo seletivo Best Minds 2024, que envolve a construção de um CRUD para um e-commerce, uma loja de esportes denominada Nunes Esporte.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
 
-## Development server
+# O que utilizei para este projeto?
+No processo seletivo, tive a liberdade de escolher as tecnologias que considerasse mais adequadas, e optei por utilizar ferramentas com as quais já estava familiarizado. Para o desenvolvimento do front-end, optei pelo Angular, um framework com o qual estou bastante familiarizado devido à sua capacidade na construção de aplicações por meio de módulos. Além disso, empreguei outras tecnologias conforme as necessidades do projeto, como o Nest.js para o back-end, Docker para automatização e padronização do ambiente do back-end, uma imagem Docker MySQL para a persistência de dados e scripts shell para facilitar a inicialização do projeto.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+> [!WARNING]
+> Altamente recomendo você primeiramente fazer as etapas do [Back-end](https://github.com/GabrielBezerraDev/loja_virtual_back_end/tree/master) antes fazer a do Front-end.
 
-## Code scaffolding
+# Como rodar o sistema?
+Considerado que você já tenha feito as etapas do Back-end, para rodar o Front-end são poucos passos:
+1. Clone o projeto com `git clone https://github.com/GabrielBezerraDev/loja_virtual-front_end.git`.
+2. Entre na pasta do projeto.
+3. Após isso, no terminal do projeto, execute o comando `npm install` para instalar as dependências necessárias.
+4. Por fim, execute o comando `npm run start` para iniciar o projeto.
+Por padrão, o projeto é executado na Porta 4200 (porta padrão das aplicações angular). Então, acessando a página [localhost:4200](http://localhost:4200), deverá aparece está landing page de produtos:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   ![PageGif](/src/assets/gif/PageNunes.gif)
