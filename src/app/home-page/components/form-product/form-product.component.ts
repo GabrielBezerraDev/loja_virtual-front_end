@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
 import { IProduct } from '../../interfaces/IProduct';
 import { ToConvertBase64Service } from '../../../services/to-convert-base64.service';
@@ -9,8 +9,7 @@ import { IUpdateProducts } from '../../interfaces/IUpdateProducts';
 import { NavigateService } from '../../../services/navigate.service';
 import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
 import { IModal } from '../../../shared/interfaces/IModal';
-import { rejects } from 'assert';
-import { Observable, delay } from 'rxjs';
+
 
 
 
@@ -29,6 +28,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
   public idProduct:number;
   public enumsCategory: Array<ECategorys> = Object.values(ECategorys);
   public isUploadImg: boolean = false;
+  public isUpdateForm: boolean = false;
   public fileImg:string;
   public modalInterface: IModal =
   {
@@ -74,13 +74,45 @@ export class FormProductComponent implements OnInit, OnDestroy {
 
   private async postForm():Promise<void>{
     if(this.formProduct.valid){
-      this.productsService.postProduct(this.product).subscribe({
-        next: () => this.redirectPageCategory()
+      new Promise((resolve,reject) =>
+      {
+        this.productsService.postProduct(this.product).subscribe({
+          next: () => resolve
+          (
+            this.setModalInterface
+            ({
+              tittleModal: "Novo Produto Adicionado!",
+              bodyModal: `O produto ${this.product.name} foi adicionado no estoque!`,
+              buttonRightTittle: "Fechar",
+              buttonLeftTittle: ""
+            })
+          ),
+          error: () => reject
+          (
+            this.setModalInterface
+            ({
+              tittleModal: "Não foi possível adicionar Produto",
+              bodyModal: `Por favor, tente novamente!`,
+              buttonRightTittle: "Fechar",
+              buttonLeftTittle: ""
+            })
+          )
+        });
       });
     }
   }
 
   private async patchForm():Promise<void>{
+    if(!this.isUpdateForm){
+      this.setModalInterface
+      ({
+        tittleModal: "Os dados do produto não foram alterado!",
+        bodyModal: `Mude os dados do produto para atualiza-lo...`,
+        buttonRightTittle: "Fechar",
+        buttonLeftTittle: ""
+      });
+      return;
+    }
     await new Promise((resolve,reject) =>
     {
       this.productsService.patchProduct(this.product,this.idProduct)
@@ -112,7 +144,6 @@ export class FormProductComponent implements OnInit, OnDestroy {
         }
       });
     })
-    console.log(this.modalInterface);
   }
 
   private setModalInterface(modalInterface: IModal):void{
@@ -151,30 +182,34 @@ export class FormProductComponent implements OnInit, OnDestroy {
     this.isUploadImg = value;
   }
 
-  private redirectPageCategory():void{
-    this.navigate.navigateURL("page-category");
-  }
-
   private showModal():void{
     this.modal.showModal();
   }
 
-  public async sendForm():Promise<void>{
-    this.product = this.formProduct.value as unknown as IProduct;
-    this.product.price = Number(this.product.price);
-    this.formType ? [await this.patchForm(), this.showModal() ] : this.postForm();
+  private checkObjectsProducts():void{
+    for(let i:number = 0; i < Object.keys(this.product).length; i++){
+      if(Object.keys(this.product)[i] === "id") continue;
+      if(this.product[Object.keys(this.product)[i] as keyof IProduct] !== (this.formProduct.value as unknown as IProduct)[Object.keys(this.product)[i] as keyof IProduct]){
+        this.isUpdateForm = true;
+      }
+    }
   }
 
-  public showForm():void{
-    console.log(this.formProduct.value);
-    console.log(this.formProduct.valid);
+  public redirectPageCategory():void{
+    if(this.isUpdateForm || !this.formType)
+    this.navigate.navigateURL("page-category");
+  }
+
+  public async sendForm():Promise<void>{
+    if(this.formType) this.checkObjectsProducts();
+    this.product = this.formProduct.value as unknown as IProduct;
+    this.product.price = Number(this.product.price);
+    this.formType ? [await this.patchForm(), this.showModal() ] : [await this.postForm(), this.showModal()];
   }
 
   public showResponse():void{
     this.productsService.getAllProducts()
-    .subscribe({
-      next: value => console.log(value)
-    });
+    .subscribe();
   }
 
   public async setFile(file:HTMLInputElement){
@@ -186,6 +221,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
 
   public setSelectValue(selectCategory:HTMLSelectElement):void{
     this.formProduct.get("category")?.setValue(selectCategory.selectedOptions[0].innerText);
-    console.log(this.formProduct.value.category);
   }
+
+
 }

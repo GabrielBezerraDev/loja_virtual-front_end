@@ -10,3 +10,9 @@ img{
 textarea{
   max-height: 170px;
 }
+
+@media (max-width: 350px){
+  .page-form{
+    margin-top: 100px;
+  }
+}

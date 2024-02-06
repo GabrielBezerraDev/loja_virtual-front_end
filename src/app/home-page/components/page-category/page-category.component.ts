@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigateService } from '../../../services/navigate.service';
 import { ProductsService } from '../../../services/products.service';
 import { IProduct } from '../../interfaces/IProduct';
@@ -76,7 +76,6 @@ export class PageCategoryComponent implements OnInit {
       }
     }
     this.objectCategoryArray = Object.values(this.objectCategory);
-    // console.log(this.objectCategoryArray);
   }
 
   public navigateTo(route:string):void{

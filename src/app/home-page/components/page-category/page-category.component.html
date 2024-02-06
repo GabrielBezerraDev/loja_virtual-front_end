@@ -4,7 +4,7 @@
 <div *ngIf="!spinner">
   <div class="d-flex position-relative">
     <div class="apresentation gap-3 d-flex align-items-center justify-content-center position-absolute h-100 w-100">
-      <div class="d-flex gap-4">
+      <div class="animation d-flex gap-4">
         <div class="d-flex gap-4 overflow-hidden">
           <div class="animation-one d-flex gap-4">
             <div class="logo">
@@ -35,15 +35,11 @@
           <mat-icon class="text-white">add_box</mat-icon>
           <p class="p-1 fs-5 fw-bolder text-white">Adicionar Produto</p>
         </div>
-        <div class="flex-grow-1 d-flex position-relative">
-          <mat-icon class="search mt-2 position-absolute">search</mat-icon>
-          <input class="ps-5 form-control w-100">
-        </div>
       </div>
       <hr>
     </div>
-    <div class="w-100 catalog-category">
-      <div class="d-flex flex-column row-gap-5 overflow-x-hidden padding-container">
+    <div class="catalog-category">
+      <div class="d-flex flex-column row-gap-5 padding-container">
         <app-catalog [productsCategory]="objectCategoryArray">
 
         </app-catalog>

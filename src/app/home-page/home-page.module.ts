@@ -3,15 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { PageCategoryComponent } from './components/page-category/page-category.component';
-import { PageProductsComponent } from './components/page-products/page-products.component';
 import { CardComponent } from './components/card/card.component';
 import {MatIconModule} from '@angular/material/icon';
 import { FormProductComponent } from './components/form-product/form-product.component';
 import { NavigateService } from '../services/navigate.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductsService } from '../services/products.service';
-import { HttpClientService } from '../services/http-client.service';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { SharedModule } from '../shared/shared.module';
 import { PaginationService } from '../services/pagination.service';
@@ -22,7 +19,6 @@ import { WindowUtilsService } from '../services/window-utils.service';
   declarations:
   [
     PageCategoryComponent,
-    PageProductsComponent,
     CardComponent,
     FormProductComponent,
     CatalogComponent

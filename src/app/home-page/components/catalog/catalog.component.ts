@@ -1,12 +1,12 @@
-import { Component, Input, OnInit, AfterContentInit,ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ICategory } from '../../interfaces/ICategory';
 import { ProductsService } from '../../../services/products.service';
 import { PaginationService } from '../../../services/pagination.service';
 import { IProduct } from '../../interfaces/IProduct';
 import { IUpdatePagination } from '../../interfaces/IUpdatePagionation';
 
-type test = {[k:string]:number}
-type test2 = {[k:string]:Array<Array<IProduct>>}
+type IndexCategory = {[k:string]:number}
+type ShowProducts = {[k:string]:Array<Array<IProduct>>}
 
 @Component({
   selector: 'app-catalog',
@@ -16,9 +16,8 @@ type test2 = {[k:string]:Array<Array<IProduct>>}
 export class CatalogComponent implements OnInit {
 @Input() productsCategory: Array<ICategory> = [];
 public indexPagination: number = 1;
-public showProducts: Array<ICategory> = [];
-public sections: test = {};
-public teste2: test2 = {};
+public sections: IndexCategory = {};
+public showProducts: ShowProducts = {};
 
 
   constructor(
@@ -27,21 +26,19 @@ public teste2: test2 = {};
   ){
   }
 
-  ngAfterViewInit(): void {
-
+  ngOnInit(): void {
+    this.setPagination();
   }
 
-  ngOnInit(): void {
+  private setPagination():void{
     for(let i:number = 0; i < this.productsCategory.length; i++){
-      this.sections[this.productsCategory[i].categoryName as keyof test] = 0;
-      this.teste2[this.productsCategory[i].categoryName as keyof test] =  (this.pagination.definePagination(6,this.productsCategory[i].product));
+      this.sections[this.productsCategory[i].categoryName as keyof IndexCategory] = 0;
+      this.showProducts[this.productsCategory[i].categoryName as keyof IndexCategory] =  (this.pagination.definePagination(6,this.productsCategory[i].product));
     }
   }
 
   public deleteProduct(id:number):void{
-    this.productsService.deleteProduct(id).subscribe({
-      next: value => console.log(value)
-    });
+    this.productsService.deleteProduct(id).subscribe();
   }
 
   public updatePagination(update:IUpdatePagination):void{

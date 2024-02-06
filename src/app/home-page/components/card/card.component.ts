@@ -2,7 +2,6 @@ import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChil
 import { IProduct } from '../../interfaces/IProduct';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { NavigateService } from '../../../services/navigate.service';
-// import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
 import { IModal } from '../../../shared/interfaces/IModal';
 import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
 import { WindowUtilsService } from '../../../services/window-utils.service';

@@ -1,4 +1,4 @@
-<div *ngIf="showProducts" class="d-flex flex-column gap-5 ">
+<div *ngIf="productsCategory" class="d-flex flex-column gap-5 ">
   <div class="d-flex flex-column gap-4" *ngFor="let productCategory of productsCategory">
 
     <div>
@@ -10,11 +10,11 @@
         </div>
         <hr>
         <div class="catalog-exist">
-          <app-card (onDeleteProduct)="deleteProduct($event)" *ngFor="let product of teste2[productCategory.categoryName][sections[productCategory.categoryName]]" [product]="product">
+          <app-card (onDeleteProduct)="deleteProduct($event)" *ngFor="let product of showProducts[productCategory.categoryName][sections[productCategory.categoryName]]" [product]="product">
 
           </app-card>
         </div>
-        <app-pagination (onUpdatePainationNumber)="updatePagination($event)" [indexFrom]="productCategory.categoryName" [maxIndexPagination]="teste2[productCategory.categoryName].length"></app-pagination>
+        <app-pagination (onUpdatePainationNumber)="updatePagination($event)" [indexFrom]="productCategory.categoryName" [maxIndexPagination]="showProducts[productCategory.categoryName].length"></app-pagination>
       </div>
       <ng-template #notFounded>
         <div class="catalog-notExist catalog">

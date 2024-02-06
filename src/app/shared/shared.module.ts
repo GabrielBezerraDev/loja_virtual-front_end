@@ -5,7 +5,6 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { MatIconModule } from '@angular/material/icon';
 import { HoverMouseDirective } from './directive/hover-mouse.directive';
-import { LogoComponent } from './components/logo/logo.component';
 
 
 
@@ -14,7 +13,6 @@ import { LogoComponent } from './components/logo/logo.component';
     ModalComponent,
     SpinnerComponent,
     PaginationComponent,
-    LogoComponent,
     HoverMouseDirective
   ],
   imports: [

@@ -2,6 +2,7 @@
   --height-img: 400px;
   --width-img: 100%;
   --card-border-radius:20px;
+  --card-body-height: 250px;
 }
 
 .card{
@@ -19,7 +20,7 @@
 }
 
 .productDescription{
-  height: 250px;
+  height: var(--card-body-height);
   padding: 20px;
 }
 
@@ -93,5 +94,10 @@ img
   }
 }
 
+@media (max-width: 270px){
+  *{
+    --card-body-height: 300px;
+  }
+}
 
 

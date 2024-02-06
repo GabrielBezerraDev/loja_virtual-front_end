@@ -23,7 +23,6 @@ export class PaginationService {
         i -= 1;
       }
     }
-    console.log(this.genericArray);
     let teste: Array<Array<T>> = [...this.genericArray] as Array<Array<T>>;
     this.genericArray = [];
     return teste;

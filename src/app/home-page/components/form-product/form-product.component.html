@@ -1,5 +1,5 @@
-<app-modal [hideButton]="hideButtonModal" [modalInterface]="modalInterface"></app-modal>
-<div appFormProduct  class="d-flex align-items-center justify-content-center header-margin padding-container">
+<app-modal (onResponseUser)="redirectPageCategory()" [hideButton]="hideButtonModal" [modalInterface]="modalInterface"></app-modal>
+<div appFormProduct  class="page-form d-flex align-items-center justify-content-center header-margin padding-container">
   <form [formGroup]="formProduct" enctype="multipart/form-data" class="d-flex flex-column gap-4 border rounded-3 p-5 border-black">
     <label for="productImage">
       <div>
@@ -14,11 +14,11 @@
     <input  #inputFile (change)="setFile(inputFile)" type="file" id="productImage" e hidden>
     <div>
       <label class="fw-bold">Nome do Produto</label>
-      <input class="form-control" type="text" (input)="showForm()" formControlName="name">
+      <input class="form-control" type="text"  formControlName="name">
     </div>
     <div>
       <label class="fw-bold">Preço do Produto</label>
-      <input class="form-control" type="text" (input)="showForm()" formControlName="price">
+      <input class="form-control" type="text"  formControlName="price">
     </div>
     <div>
       <label class="fw-bold">Categoria do Produto</label>
@@ -29,7 +29,7 @@
     </div>
     <div>
       <label class="fw-bold">Descrição do Produto</label>
-      <textarea class="form-control"(input)="showForm()" formControlName="description"></textarea>
+      <textarea class="form-control" formControlName="description"></textarea>
     </div>
     <div>
       <button (click)="sendForm()">Confirmar</button>
