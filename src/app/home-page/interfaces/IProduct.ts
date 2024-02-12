@@ -4,6 +4,6 @@ export interface IProduct{
   price: number;
   description: string;
   imgBase64: string;
-  category: string;
+  categoryId: number;
   codeProduct:string;
 }

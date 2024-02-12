@@ -3,12 +3,27 @@
   border: 1px dashed black;
 }
 
+mat-icon{
+  color: var(--main-color);
+}
+
+.return-page{
+  height: 10px;
+}
+
 img{
   width: 60vw;
 }
 
 textarea{
   max-height: 170px;
+}
+
+button{
+  background-color: var(--main-color);
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 @media (max-width: 350px){

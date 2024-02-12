@@ -17,6 +17,15 @@ export class ProductsService {
     return this.httpClient.get<Array<IProduct>>("/products");
   }
 
+  public getProductByCategory(id:number):Observable<Array<IProduct>>{
+    return this.httpClient.get<Array<IProduct>>(`/products/byCategory/${id}`);
+  }
+
+  public getNewCodeProduct():Observable<string>{
+    return this.httpClient.get<string>("/products/codeProduct");
+  }
+
+
   public postProduct(body:IProduct):Observable<IProduct>{
     return this.httpClient.post<IProduct>("/products", body);
   }
@@ -28,10 +37,5 @@ export class ProductsService {
   public deleteProduct(id:number):Observable<IProduct>{
     return this.httpClient.delete<IProduct>("/products",id);
   }
-
-  public getNewCodeProduct():Observable<string>{
-    return this.httpClient.get<string>("/products/codeProduct");
-  }
-
 
 }

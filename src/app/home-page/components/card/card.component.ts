@@ -1,17 +1,18 @@
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { IProduct } from '../../interfaces/IProduct';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { NavigateService } from '../../../services/navigate.service';
 import { IModal } from '../../../shared/interfaces/IModal';
 import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
 import { WindowUtilsService } from '../../../services/window-utils.service';
+import { BootstrapUtilsService } from '../../../services/bootstrap-utils.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
-export class CardComponent implements AfterViewInit{
+export class CardComponent implements AfterViewInit, OnInit{
   @ViewChild(ModalComponent) modal: ModalComponent;
   @Output() onDeleteProduct: EventEmitter<number> = new EventEmitter<number>();
   @Input() product: IProduct;
@@ -29,12 +30,21 @@ export class CardComponent implements AfterViewInit{
     private navigate: NavigateService,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private windowUtilsService: WindowUtilsService
+    private windowUtilsService: WindowUtilsService,
+    private bootstrapUtils: BootstrapUtilsService
   ){}
+
+    ngOnInit(): void {
+      this.activedTooltips();
+    }
 
     ngAfterViewInit(): void {
       this.cardNotification = this.elementRef.nativeElement.querySelector(".notification");
     }
+
+  private activedTooltips():void{
+    this.bootstrapUtils.activedTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  }
 
   public setFormType(value:boolean, product:IProduct):void{
     this.localStorage.setDataLocalStorage("isEditForm",value);

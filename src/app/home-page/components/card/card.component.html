@@ -19,8 +19,16 @@
   </div>
   <div>
     <div class="footer-card d-flex justify-content-end py-2 pe-3">
-      <mat-icon (click)="[navigateTo('new-product'),setFormType(true,product)]">edit</mat-icon>
-      <mat-icon (click)="[deleteProduct()]">delete</mat-icon>
+      <mat-icon (click)="[navigateTo('new-product'),setFormType(true,product)]"
+      data-bs-toggle="tooltip" data-bs-placement="top"
+      data-bs-custom-class="custom-tooltip"
+      data-bs-title="Editar Produto."
+      >edit</mat-icon>
+      <mat-icon (click)="[deleteProduct()]"
+      data-bs-toggle="tooltip" data-bs-placement="top"
+      data-bs-custom-class="custom-tooltip"
+      data-bs-title="Deletar Produto."
+      >delete</mat-icon>
     </div>
   </div>
 </div>

@@ -39,8 +39,8 @@
       <hr>
     </div>
     <div class="catalog-category">
-      <div class="d-flex flex-column row-gap-5 padding-container">
-        <app-catalog [productsCategory]="objectCategoryArray">
+      <div *ngIf="objectIsCreated" class="d-flex flex-column row-gap-5 padding-container">
+        <app-catalog [productsCategory]="objectCategory">
 
         </app-catalog>
       </div>

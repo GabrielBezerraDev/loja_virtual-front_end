@@ -13,6 +13,8 @@ import { CatalogComponent } from './components/catalog/catalog.component';
 import { SharedModule } from '../shared/shared.module';
 import { PaginationService } from '../services/pagination.service';
 import { WindowUtilsService } from '../services/window-utils.service';
+import { BootstrapUtilsService } from '../services/bootstrap-utils.service';
+import { CategoryService } from '../services/category.service';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { WindowUtilsService } from '../services/window-utils.service';
     NavigateService,
     ProductsService,
     PaginationService,
-    WindowUtilsService
+    WindowUtilsService,
+    BootstrapUtilsService,
+    CategoryService
   ]
 })
 export class HomePageModule { }

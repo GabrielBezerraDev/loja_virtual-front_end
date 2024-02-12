@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ICategory } from '../../interfaces/ICategory';
+import { Component, Input, OnInit, AfterContentInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { ICategoryWithProducts } from '../../interfaces/ICategoryWithProducts';
 import { ProductsService } from '../../../services/products.service';
 import { PaginationService } from '../../../services/pagination.service';
 import { IProduct } from '../../interfaces/IProduct';
@@ -13,8 +13,8 @@ type ShowProducts = {[k:string]:Array<Array<IProduct>>}
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.scss'
 })
-export class CatalogComponent implements OnInit {
-@Input() productsCategory: Array<ICategory> = [];
+export class CatalogComponent implements OnInit, AfterViewInit, OnChanges {
+@Input() productsCategory: Array<ICategoryWithProducts> = [];
 public indexPagination: number = 1;
 public sections: IndexCategory = {};
 public showProducts: ShowProducts = {};
@@ -30,11 +30,21 @@ public showProducts: ShowProducts = {};
     this.setPagination();
   }
 
+  ngAfterViewInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      this.productsCategory = changes["productsCategory"].currentValue;
+      console.log(this.productsCategory[1]);
+  }
+
   private setPagination():void{
     for(let i:number = 0; i < this.productsCategory.length; i++){
       this.sections[this.productsCategory[i].categoryName as keyof IndexCategory] = 0;
       this.showProducts[this.productsCategory[i].categoryName as keyof IndexCategory] =  (this.pagination.definePagination(6,this.productsCategory[i].product));
     }
+    console.log(this.productsCategory[0]);
+    console.log(this.productsCategory[0].product);
   }
 
   public deleteProduct(id:number):void{

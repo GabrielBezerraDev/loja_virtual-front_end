@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProductsService } from '../../../services/products.service';
 import { IProduct } from '../../interfaces/IProduct';
@@ -9,6 +9,12 @@ import { IUpdateProducts } from '../../interfaces/IUpdateProducts';
 import { NavigateService } from '../../../services/navigate.service';
 import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
 import { IModal } from '../../../shared/interfaces/IModal';
+import * as bootstrap from 'bootstrap';
+import { BootstrapUtilsService } from '../../../services/bootstrap-utils.service';
+import { CategoryService } from '../../../services/category.service';
+import { resolve } from 'path';
+import { rejects } from 'assert';
+import { ICategory } from '../../interfaces/ICategory';
 
 
 
@@ -27,6 +33,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
   public hideButtonModal: boolean = true;
   public idProduct:number;
   public enumsCategory: Array<ECategorys> = Object.values(ECategorys);
+  public categorys: Array<ICategory>;
   public isUploadImg: boolean = false;
   public isUpdateForm: boolean = false;
   public fileImg:string;
@@ -42,7 +49,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
     price:["", Validators.required],
     description:["", Validators.required],
     imgBase64:["",Validators.required],
-    category: ["", Validators.required],
+    categoryId: ["", Validators.required],
     codeProduct: ["", Validators.required]
   })
 
@@ -51,12 +58,18 @@ export class FormProductComponent implements OnInit, OnDestroy {
     private localStorage: LocalStorageService,
     private navigate: NavigateService,
     private formBuilder:FormBuilder,
-    private toConvertBase64Service: ToConvertBase64Service
+    private toConvertBase64Service: ToConvertBase64Service,
+    private elementRef: ElementRef,
+    private bootstrapUtils: BootstrapUtilsService,
+    private categoryService: CategoryService
   ){
   }
 
-  ngOnInit(): void{
+  async ngOnInit(): Promise<void>{
       this.setFormType();
+      this.activedTooltips();
+      await this.getAllCategory();
+      console.log(this.categorys);
       if(this.formType) {
         this.setBodyProduct();
         this.setIdProdcut();
@@ -70,6 +83,19 @@ export class FormProductComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
       this.localStorage.removeDataLocalStorage("isEditForm");
+  }
+
+  private getAllCategory():Promise<void>{
+    return new Promise((resolve, rejects) => {
+      this.categoryService.getAllCategory().subscribe(
+        {
+          next: (value) => {
+            this.categorys = value
+            resolve();
+          }
+        }
+      )
+    })
   }
 
   private async postForm():Promise<void>{
@@ -99,6 +125,14 @@ export class FormProductComponent implements OnInit, OnDestroy {
           )
         });
       });
+    }else{
+      this.setModalInterface
+      ({
+        tittleModal: "Dados inválidos!",
+        bodyModal: `O formulário não foi preenchido corretamente!`,
+        buttonRightTittle: "Fechar",
+        buttonLeftTittle: ""
+      })
     }
   }
 
@@ -106,7 +140,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
     if(!this.isUpdateForm){
       this.setModalInterface
       ({
-        tittleModal: "Os dados do produto não foram alterado!",
+        tittleModal: "Os dados do produto não foram alterados!",
         bodyModal: `Mude os dados do produto para atualiza-lo...`,
         buttonRightTittle: "Fechar",
         buttonLeftTittle: ""
@@ -123,7 +157,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
             this.setModalInterface
             ({
               tittleModal: "Atualizado com sucesso!",
-              bodyModal: `O produto \"${this.product.name}\" foi atualizado com sucesso`,
+              bodyModal: `O produto \"${this.product.name}\" foi atualizado com sucesso!`,
               buttonRightTittle: "Fechar",
               buttonLeftTittle: ""
             })
@@ -144,6 +178,10 @@ export class FormProductComponent implements OnInit, OnDestroy {
         }
       });
     })
+  }
+
+  private activedTooltips():void{
+    this.bootstrapUtils.activedTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
   }
 
   private setModalInterface(modalInterface: IModal):void{
@@ -195,8 +233,12 @@ export class FormProductComponent implements OnInit, OnDestroy {
     }
   }
 
+  public returnButton():void{
+    this.navigate.navigateURL("page-category");
+  }
+
   public redirectPageCategory():void{
-    if(this.isUpdateForm || !this.formType)
+    if(this.isUpdateForm || (!this.formType && this.formProduct.valid))
     this.navigate.navigateURL("page-category");
   }
 
@@ -204,6 +246,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
     if(this.formType) this.checkObjectsProducts();
     this.product = this.formProduct.value as unknown as IProduct;
     this.product.price = Number(this.product.price);
+    this.product.categoryId = Number(this.product.categoryId);
     this.formType ? [await this.patchForm(), this.showModal() ] : [await this.postForm(), this.showModal()];
   }
 
@@ -220,7 +263,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
   }
 
   public setSelectValue(selectCategory:HTMLSelectElement):void{
-    this.formProduct.get("category")?.setValue(selectCategory.selectedOptions[0].innerText);
+    this.formProduct.get("categoryId")?.setValue(selectCategory.selectedOptions[0].value);
   }
 
 
