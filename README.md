@@ -20,4 +20,4 @@ Considerando que você já tenha feito as etapas do Back-end, para rodar o Front
 
 Por padrão, o projeto é executado na Porta 4200 (porta padrão das aplicações angular). Então, acessando a página [localhost:4200](http://localhost:4200), deverá aparece está landing page de produtos:
 
-   like
+   ![ladingPage](./src/assets/gif/PageNunes.gif)
