@@ -80,6 +80,7 @@ export class FormProductComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
       this.localStorage.removeDataLocalStorage("isEditForm");
+      this.disableTooltips();
   }
 
   private getAllCategory():Promise<void>{
@@ -179,6 +180,10 @@ export class FormProductComponent implements OnInit, OnDestroy {
 
   private activedTooltips():void{
     this.bootstrapUtils.activedTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  }
+
+  private disableTooltips():void{
+    this.bootstrapUtils.disableTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
   }
 
   private setModalInterface(modalInterface: IModal):void{
