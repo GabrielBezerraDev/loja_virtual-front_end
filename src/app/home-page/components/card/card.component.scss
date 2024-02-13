@@ -1,5 +1,5 @@
 *{
-  --height-img: 400px;
+  --height-img: 480px;
   --width-img: 100%;
   --card-border-radius:20px;
   --card-body-height: 250px;
@@ -47,6 +47,12 @@ img
   border-radius: 8px;
   opacity: 0;
   transition: opacity 0.4s;
+}
+
+@media (max-width: 1580px){
+  *{
+    --height-img: 400px;
+  }
 }
 
 @media (max-width: 890px){
