@@ -9,7 +9,7 @@ No processo seletivo, tive a liberdade de escolher as tecnologias que consideras
 > Altamente recomendo você primeiramente faça as etapas do [Back-end](https://github.com/GabrielBezerraDev/loja_virtual_back_end/tree/master) antes de fazer as do Front-end.
 
 # Como rodar o sistema?
-Considerado que você já tenha feito as etapas do Back-end, para rodar o Front-end são poucos passos:
+Considerando que você já tenha feito as etapas do Back-end, para rodar o Front-end são poucos passos:
 1. Clone o projeto com `git clone https://github.com/GabrielBezerraDev/loja_virtual-front_end.git`.
 2. Entre na pasta do projeto.
 3. Após isso, no terminal do projeto, execute o comando `npm install` para instalar as dependências necessárias.
