@@ -6,7 +6,7 @@ Este projeto destina-se ao processo seletivo Best Minds 2024, que envolve a cons
 No processo seletivo, tive a liberdade de escolher as tecnologias que considerasse mais adequadas, e optei por utilizar ferramentas com as quais já estava familiarizado. Para o desenvolvimento do front-end, optei pelo Angular, um framework com o qual estou bastante familiarizado devido à sua capacidade na construção de aplicações por meio de módulos. Além disso, empreguei outras tecnologias conforme as necessidades do projeto, como o Nest.js para o back-end, Docker para automatização e padronização do ambiente do back-end, uma imagem Docker MySQL para a persistência de dados e scripts shell para facilitar a inicialização do projeto.
 
 > [!WARNING]
-> Altamente recomendo você primeiramente fazer as etapas do [Back-end](https://github.com/GabrielBezerraDev/loja_virtual_back_end/tree/master) antes de fazer as do Front-end.
+> Altamente recomendo você primeiramente faça as etapas do [Back-end](https://github.com/GabrielBezerraDev/loja_virtual_back_end/tree/master) antes de fazer as do Front-end.
 
 # Como rodar o sistema?
 Considerado que você já tenha feito as etapas do Back-end, para rodar o Front-end são poucos passos:
