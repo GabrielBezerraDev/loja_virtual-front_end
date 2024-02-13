@@ -9,11 +9,8 @@ import { IUpdateProducts } from '../../interfaces/IUpdateProducts';
 import { NavigateService } from '../../../services/navigate.service';
 import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
 import { IModal } from '../../../shared/interfaces/IModal';
-import * as bootstrap from 'bootstrap';
 import { BootstrapUtilsService } from '../../../services/bootstrap-utils.service';
 import { CategoryService } from '../../../services/category.service';
-import { resolve } from 'path';
-import { rejects } from 'assert';
 import { ICategory } from '../../interfaces/ICategory';
 
 

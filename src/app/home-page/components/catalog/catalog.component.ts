@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterContentInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ICategoryWithProducts } from '../../interfaces/ICategoryWithProducts';
 import { ProductsService } from '../../../services/products.service';
 import { PaginationService } from '../../../services/pagination.service';

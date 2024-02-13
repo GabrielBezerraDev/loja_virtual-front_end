@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { IProduct } from '../../interfaces/IProduct';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { NavigateService } from '../../../services/navigate.service';
@@ -12,7 +12,7 @@ import { BootstrapUtilsService } from '../../../services/bootstrap-utils.service
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
-export class CardComponent implements AfterViewInit, OnInit{
+export class CardComponent implements AfterViewInit, OnInit, OnDestroy{
   @ViewChild(ModalComponent) modal: ModalComponent;
   @Output() onDeleteProduct: EventEmitter<number> = new EventEmitter<number>();
   @Input() product: IProduct;
@@ -38,12 +38,20 @@ export class CardComponent implements AfterViewInit, OnInit{
       this.activedTooltips();
     }
 
+    ngOnDestroy(): void {
+      this.disableTooltips();
+    }
+
     ngAfterViewInit(): void {
       this.cardNotification = this.elementRef.nativeElement.querySelector(".notification");
     }
 
   private activedTooltips():void{
     this.bootstrapUtils.activedTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  }
+
+  private disableTooltips():void{
+    this.bootstrapUtils.disableTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
   }
 
   public setFormType(value:boolean, product:IProduct):void{

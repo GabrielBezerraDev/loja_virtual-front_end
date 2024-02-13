@@ -1,14 +1,10 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigateService } from '../../../services/navigate.service';
 import { ProductsService } from '../../../services/products.service';
 import { IProduct } from '../../interfaces/IProduct';
 
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { ICategoryWithProducts } from '../../interfaces/ICategoryWithProducts';
-
-
-type ObjectCategory = {[k:string]:ICategoryWithProducts};
-
 @Component({
   selector: 'app-page-category',
   templateUrl: './page-category.component.html',

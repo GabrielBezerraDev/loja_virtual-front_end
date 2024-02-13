@@ -16,4 +16,9 @@ export class BootstrapUtilsService implements OnInit {
     const tooltipTriggerList: Array<HTMLElement> = elements;
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
   }
+
+  public disableTooltips(elements:Array<HTMLElement>):void{
+    const tooltipTriggerList: Array<HTMLElement> = elements;
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => bootstrap.Tooltip.getInstance(tooltipTriggerEl)?.hide())
+  }
 }
