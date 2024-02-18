@@ -58,16 +58,24 @@ export class LoginComponent{
     return this.modalInterface.bodyModal;
   }
 
+  private resetError():void{
+    this.modalInterface.bodyModal = "";
+  }
+
   public teste():void{
     console.log(this.formLogin.value);
   }
 
   public async redirectHome():Promise<void>{
-    await this.navigateService.navigateToWithPromise("home").then(() => this.loginService.isAllow = false);
+    await this.navigateService.navigateToWithPromise("home").then(() => {
+      this.loginService.isAllow = false;
+      this.resetError();
+    });
 
   }
 
   public login():void{
+    this.resetError();
     this.checkValidateForm();
     if(this.getErrorForm()) {
       this.showModal();
@@ -76,6 +84,7 @@ export class LoginComponent{
     this.loginService.authenticator(this.formLogin.value.email as string).subscribe({
       next: (user) => {
         if(!user || user.token !== this.formLogin.value.token as string) {
+          console.log(user)
           this.setErrorForm("Senha ou email incorreto!");
           this.showModal();
           return;
