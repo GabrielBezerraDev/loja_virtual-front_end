@@ -18,8 +18,6 @@ const routes: Routes =
     path:"new-product",
     component: FormProductComponent
   }
-
-
 ];
 
 @NgModule({

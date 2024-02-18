@@ -236,12 +236,12 @@ export class FormProductComponent implements OnInit, OnDestroy {
   }
 
   public returnButton():void{
-    this.navigate.navigateURL("page-category");
+    this.navigate.navigateURL("home/page-category");
   }
 
   public redirectPageCategory():void{
     if(this.isUpdateForm || (!this.formType && this.formProduct.valid))
-    this.navigate.navigateURL("page-category");
+    this.navigate.navigateURL("home/page-category");
   }
 
   public async sendForm():Promise<void>{

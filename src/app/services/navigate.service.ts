@@ -15,6 +15,10 @@ export class NavigateService {
     this.route.navigate([route]);
   }
 
+  public navigateToWithPromise(route:string):Promise<boolean>{
+    return this.route.navigate([route]);
+  }
+
   public navigateURL(route:string){
     this.route.navigateByUrl(route);
   }

@@ -7,7 +7,7 @@
 :root{
   --icon-size: 40px;
   --main-color: #45373e;
-
+  --header-size: 8vh;
  *{
   box-sizing: border-box;
   margin: 0;
@@ -18,8 +18,8 @@
   overflow-x: hidden !important;
  }
 
- .header-margin{
-  margin-top: 8vh;
+ .header-padding{
+  padding-top: var(--header-size) !important;
  }
 
  .padding-container{

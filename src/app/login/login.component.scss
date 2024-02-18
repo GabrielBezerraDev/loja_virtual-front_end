@@ -1,0 +1,19 @@
+
+*{
+  --header-size: 12vh;
+}
+
+.form-login{
+  height: 100vh;
+}
+
+.form{
+  height: fit-content;
+}
+
+button{
+  background-color: var(--main-color);
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+}
