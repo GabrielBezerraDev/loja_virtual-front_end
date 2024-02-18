@@ -1,6 +1,7 @@
 
 *{
   --header-size: 12vh;
+  --width-form: 25%;
 }
 
 .form-login{
@@ -9,6 +10,7 @@
 
 .form{
   height: fit-content;
+  width: var(--width-form);
 }
 
 button{
@@ -16,4 +18,16 @@ button{
   color: #ffffff;
   padding: 5px;
   border-radius: 5px;
+}
+
+@media (max-width: 1025px) {
+  *{
+    --width-form: 40%
+  }
+}
+
+@media (max-width: 600px) {
+  *{
+    --width-form: 80%
+  }
 }
