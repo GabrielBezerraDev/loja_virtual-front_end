@@ -13,7 +13,8 @@ Considerando que você já tenha feito as etapas do Back-end, para rodar o Front
 1. Clone o projeto com `git clone https://github.com/GabrielBezerraDev/loja_virtual-front_end.git`.
 2. Entre na pasta do projeto.
 3. Após isso, no terminal do projeto, execute o comando `npm install` para instalar as dependências necessárias.
-4. Por fim, execute o comando `npm run start` para iniciar o projeto.
+4. Execute o comando `npm run start` para iniciar o projeto.
+5. Por fim, quando você estiver na página de login, utilize o email "admin@gmail.com" e a senha "admin" para acessar o sistema.
 
 > [!WARNING]
 > Se o terminal acusar um erro relacionado com **ng cli**, instale ng cli do angular com o comando `npm i @angular/cli`.
