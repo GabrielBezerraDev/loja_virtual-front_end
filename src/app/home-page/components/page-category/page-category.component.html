@@ -1,7 +1,7 @@
-<div *ngIf="spinner">
+@if(spinner){
   <app-spinner></app-spinner>
-</div>
-<div *ngIf="!spinner">
+}
+@else{
   <div class="d-flex position-relative">
     <div class="apresentation gap-3 d-flex align-items-center justify-content-center position-absolute h-100 w-100">
       <div class="animation d-flex gap-4">
@@ -39,13 +39,13 @@
       <hr>
     </div>
     <div class="catalog-category">
-      <div *ngIf="objectIsCreated" class="d-flex flex-column row-gap-5 padding-container">
-        <app-catalog [productsCategory]="objectCategory">
-
-        </app-catalog>
-      </div>
+      @if(objectIsCreated){
+        <div class="d-flex flex-column row-gap-5 padding-container">
+          <app-catalog [productsCategory]="objectCategory"></app-catalog>
+        </div>
+      }
     </div>
   </div>
-</div>
+}
 
 

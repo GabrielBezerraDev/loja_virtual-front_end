@@ -1,27 +1,32 @@
-<div *ngIf="productsCategory" class="d-flex flex-column gap-5 ">
-  <div class="d-flex flex-column gap-4" *ngFor="let productCategory of productsCategory">
+@if(productsCategory){
+  <div class="d-flex flex-column gap-5 ">
+    @for(productCategory of productsCategory; track $index){
+      <div class="d-flex flex-column gap-4">
+        <div>
+          @if(productCategory.product.length > 0){
+            <div class="catalog overflow-hidden">
+              <div class="sub-header px-4 pt-5 pb-3">
+                <div class="flex-grow-1">
+                  <h2>{{productCategory.categoryName}}</h2>
+                </div>
+              </div>
+              <hr>
+              <div class="catalog-exist">
+                <app-card (onDeleteProduct)="deleteProduct($event)" *ngFor="let product of showProducts[productCategory.categoryName][sections[productCategory.categoryName]]" [product]="product">
 
-    <div>
-      <div class="catalog overflow-hidden" *ngIf="productCategory.product.length > 0; else notFounded">
-        <div class="sub-header px-4 pt-5 pb-3">
-          <div class="flex-grow-1">
-            <h2>{{productCategory.categoryName}}</h2>
-          </div>
+                </app-card>
+              </div>
+              <app-pagination (onUpdatePainationNumber)="updatePagination($event)" [indexFrom]="productCategory.categoryName" [maxIndexPagination]="showProducts[productCategory.categoryName].length"></app-pagination>
+            </div>
+          }
+          @else{
+            <div class="catalog-notExist catalog">
+              <mat-icon>warning</mat-icon>
+              <p>Ainda não há produtos cadastrados</p>
+            </div>
+          }
         </div>
-        <hr>
-        <div class="catalog-exist">
-          <app-card (onDeleteProduct)="deleteProduct($event)" *ngFor="let product of showProducts[productCategory.categoryName][sections[productCategory.categoryName]]" [product]="product">
-
-          </app-card>
-        </div>
-        <app-pagination (onUpdatePainationNumber)="updatePagination($event)" [indexFrom]="productCategory.categoryName" [maxIndexPagination]="showProducts[productCategory.categoryName].length"></app-pagination>
       </div>
-      <ng-template #notFounded>
-        <div class="catalog-notExist catalog">
-          <mat-icon>warning</mat-icon>
-          <p>Ainda não há produtos cadastrados</p>
-        </div>
-      </ng-template>
-    </div>
+    }
   </div>
-</div>
+}

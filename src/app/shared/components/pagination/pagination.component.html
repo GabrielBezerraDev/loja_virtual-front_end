@@ -1,11 +1,15 @@
 <div class="pagination pt-3 px-3 border-top position-relative">
   <div class=" flex-grow-1 d-flex justify-content-start align-content-center">
-    <mat-icon *ngIf="paginationNumber > 0"  class=" ps-3 text-white rounded-circle d-flex align-content-center justify-content-center bg-black" (click)="minusIndexPagination()">arrow_back_ios</mat-icon>
+    @if(paginationNumber > 0){
+      <mat-icon class=" ps-3 text-white rounded-circle d-flex align-content-center justify-content-center bg-black" (click)="minusIndexPagination()">arrow_back_ios</mat-icon>
+    }
   </div>
   <div class=" flex-grow-1 d-flex justify-content-center align-content-center">
     <p class="indexNumber fw-bolder fs-2">{{paginationNumber+1}}</p>
   </div>
   <div class=" flex-grow-1 d-flex justify-content-end align-content-center">
-    <mat-icon *ngIf="paginationNumber < (maxIndexPagination-1)"  class=" ps-1 text-white rounded-circle d-flex align-content-center justify-content-center bg-black" (click)="sumIndexPagination()">arrow_forward_ios</mat-icon>
+    @if(paginationNumber < (maxIndexPagination-1)){
+     <mat-icon class=" ps-1 text-white rounded-circle d-flex align-content-center justify-content-center bg-black" (click)="sumIndexPagination()">arrow_forward_ios</mat-icon>
+    }
   </div>
 </div>

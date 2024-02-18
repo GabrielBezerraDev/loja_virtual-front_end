@@ -14,12 +14,16 @@
       <label for="productImage">
         <div>
           <label class="fw-bold">Imagem do Produto</label>
-          <div *ngIf="!isUploadImg" class="place-holder d-flex align-items-center justify-content-center flex-column p-2">
-            <mat-icon>upload_file</mat-icon>
-            <p>Selecione um arquivo</p>
-          </div>
+          @if(!isUploadImg){
+            <div class="place-holder d-flex align-items-center justify-content-center flex-column p-2">
+              <mat-icon>upload_file</mat-icon>
+              <p>Selecione um arquivo</p>
+            </div>
+          }
         </div>
-        <img src="{{fileImg}}" *ngIf="isUploadImg">
+        @if(isUploadImg){
+          <img src="{{fileImg}}">
+        }
       </label>
       <input  #inputFile (change)="setFile(inputFile)" type="file" id="productImage" e hidden>
       <div>
@@ -34,7 +38,10 @@
         <label class="fw-bold">Categoria do Produto</label>
         <select #selectCategory (change)="setSelectValue(selectCategory)" class="form-select" aria-label="Default select example">
           <option selected disabled>Escolha a categoria</option>
-          <option *ngFor="let category of categorys let i = index" value="{{category.id}}">{{category.category}}</option>
+          @for(category of categorys; track $index){
+            <option value="{{category.id}}">{{category.category}}</option>
+          }
+          <!-- <option *ngFor="let category of categorys let i = index" value="{{category.id}}">{{category.category}}</option> -->
         </select>
       </div>
       <div>

@@ -9,7 +9,9 @@
         {{modalInterface.bodyModal}}
       </div>
       <div class="modal-footer">
-        <button *ngIf="!hideButton" (click)="responseUser(false)" type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{modalInterface.buttonLeftTittle}}</button>
+        @if(!hideButton){
+          <button (click)="responseUser(false)" type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{modalInterface.buttonLeftTittle}}</button>
+        }
         <button (click)="responseUser(true)"type="button" class="button-right btn btn-primary">{{modalInterface.buttonRightTittle}}</button>
       </div>
     </div>
