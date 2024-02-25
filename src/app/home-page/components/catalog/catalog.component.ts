@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ICategoryWithProducts } from '../../interfaces/ICategoryWithProducts';
-import { ProductsService } from '../../../services/products.service';
-import { PaginationService } from '../../../services/pagination.service';
+import { ProductsService } from '../../../services/products/products.service';
+import { PaginationUtils } from '../../../utils/pagination.utils';
 import { IProduct } from '../../interfaces/IProduct';
 import { IUpdatePagination } from '../../interfaces/IUpdatePagionation';
 
@@ -21,8 +21,7 @@ public showProducts: ShowProducts = {};
 
 
   constructor(
-    private productsService: ProductsService,
-    private pagination: PaginationService
+    private productsService: ProductsService
   ){
   }
 
@@ -41,7 +40,7 @@ public showProducts: ShowProducts = {};
   private setPagination():void{
     for(let i:number = 0; i < this.productsCategory.length; i++){
       this.sections[this.productsCategory[i].categoryName as keyof IndexCategory] = 0;
-      this.showProducts[this.productsCategory[i].categoryName as keyof IndexCategory] =  (this.pagination.definePagination(6,this.productsCategory[i].product));
+      this.showProducts[this.productsCategory[i].categoryName as keyof IndexCategory] =  (PaginationUtils.definePagination(6,this.productsCategory[i].product));
     }
     console.log(this.productsCategory[0]);
     console.log(this.productsCategory[0].product);

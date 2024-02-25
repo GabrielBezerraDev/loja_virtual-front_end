@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from './http-client.service';
+import { HttpClientService } from '../http-client/http-client.service';
 import { Observable } from 'rxjs';
-import { IProduct } from '../home-page/interfaces/IProduct';
-import { IUpdateProducts } from '../home-page/interfaces/IUpdateProducts';
+import { IProduct } from '../../home-page/interfaces/IProduct';
+import { IUpdateProducts } from '../../home-page/interfaces/IUpdateProducts';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +26,8 @@ export class ProductsService {
   }
 
 
-  public postProduct(body:IProduct):Observable<IProduct>{
-    return this.httpClient.post<IProduct>("/products", body);
+  public postProduct(body:IProduct):Observable<string>{
+    return this.httpClient.post<string,IProduct>("/products", body);
   }
 
   public patchProduct(body:IUpdateProducts, id:number):Observable<IUpdateProducts>{

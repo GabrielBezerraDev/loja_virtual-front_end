@@ -4,7 +4,7 @@ import * as bootstrap from 'bootstrap';
 @Injectable({
   providedIn: 'root'
 })
-export class BootstrapUtilsService implements OnInit {
+export class BootstrapUtils implements OnInit {
 
   constructor() { }
 
@@ -12,12 +12,12 @@ export class BootstrapUtilsService implements OnInit {
 
   }
 
-  public activedTooltips(elements:Array<HTMLElement>):void{
+  public static activedTooltips(elements:Array<HTMLElement>):void{
     const tooltipTriggerList: Array<HTMLElement> = elements;
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
   }
 
-  public disableTooltips(elements:Array<HTMLElement>):void{
+  public static disableTooltips(elements:Array<HTMLElement>):void{
     const tooltipTriggerList: Array<HTMLElement> = elements;
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => bootstrap.Tooltip.getInstance(tooltipTriggerEl)?.hide())
   }

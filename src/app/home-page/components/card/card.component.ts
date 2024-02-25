@@ -1,11 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { IProduct } from '../../interfaces/IProduct';
-import { LocalStorageService } from '../../../services/local-storage.service';
-import { NavigateService } from '../../../services/navigate.service';
+import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
+import { NavigateService } from '../../../services/navigate/navigate.service';
 import { IModal } from '../../../shared/interfaces/IModal';
 import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
-import { WindowUtilsService } from '../../../services/window-utils.service';
-import { BootstrapUtilsService } from '../../../services/bootstrap-utils.service';
+import { WindowUtils } from '../../../utils/window-utils';
+import { BootstrapUtils } from '../../../utils/bootstrap-utils';
 
 @Component({
   selector: 'app-card',
@@ -30,8 +30,6 @@ export class CardComponent implements AfterViewInit, OnInit, OnDestroy{
     private navigate: NavigateService,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private windowUtilsService: WindowUtilsService,
-    private bootstrapUtils: BootstrapUtilsService
   ){}
 
     ngOnInit(): void {
@@ -47,11 +45,11 @@ export class CardComponent implements AfterViewInit, OnInit, OnDestroy{
     }
 
   private activedTooltips():void{
-    this.bootstrapUtils.activedTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    BootstrapUtils.activedTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
   }
 
   private disableTooltips():void{
-    this.bootstrapUtils.disableTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    BootstrapUtils.disableTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
   }
 
   public setFormType(value:boolean, product:IProduct):void{
@@ -70,7 +68,7 @@ export class CardComponent implements AfterViewInit, OnInit, OnDestroy{
   public responseUser(value:boolean):void{
     if(value) {
       this.onDeleteProduct.emit(this.product.id);
-      this.windowUtilsService.reloadPage();
+      WindowUtils.reloadPage();
     }
   }
 

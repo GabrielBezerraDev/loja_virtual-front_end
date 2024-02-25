@@ -6,15 +6,15 @@ import { PageCategoryComponent } from './components/page-category/page-category.
 import { CardComponent } from './components/card/card.component';
 import {MatIconModule} from '@angular/material/icon';
 import { FormProductComponent } from './components/form-product/form-product.component';
-import { NavigateService } from '../services/navigate.service';
+import { NavigateService } from '../services/navigate/navigate.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../services/products/products.service';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { SharedModule } from '../shared/shared.module';
-import { PaginationService } from '../services/pagination.service';
-import { WindowUtilsService } from '../services/window-utils.service';
-import { BootstrapUtilsService } from '../services/bootstrap-utils.service';
-import { CategoryService } from '../services/category.service';
+import { PaginationUtils } from '../utils/pagination.utils';
+import { WindowUtils} from '../utils/window-utils';
+import { BootstrapUtils } from '../utils/bootstrap-utils';
+import { CategoryService } from '../services/category/category.service';
 
 
 @NgModule({
@@ -36,9 +36,6 @@ import { CategoryService } from '../services/category.service';
   [
     NavigateService,
     ProductsService,
-    PaginationService,
-    WindowUtilsService,
-    BootstrapUtilsService,
     CategoryService
   ]
 })

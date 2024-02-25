@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class WindowUtilsService {
+export class WindowUtils {
 
   constructor() { }
 
-  public reloadPage():void{
+  public static reloadPage():void{
     window.location.reload();
   }
 

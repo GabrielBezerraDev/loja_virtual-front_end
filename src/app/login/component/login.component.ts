@@ -1,11 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigateService } from '../services/navigate.service';
-import { authLoginGuard } from '../services/routingGuard/auth-login.guard';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { LoginService } from '../services/login.service';
-import { ModalComponent } from '../shared/components/modal/modal/modal.component';
-import { IModal } from '../shared/interfaces/IModal';
+import { FormBuilder, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login/login.service';
+import { ModalComponent } from '../../shared/components/modal/modal/modal.component';
+import { IModal } from '../../shared/interfaces/IModal';
+import { NavigateService } from '../../services/navigate/navigate.service';
 
 @Component({
   selector: 'app-login',
@@ -81,17 +79,17 @@ export class LoginComponent{
       this.showModal();
       return;
     }
-    this.loginService.authenticator(this.formLogin.value.email as string).subscribe({
+    this.loginService.authenticator({
+      email: this.formLogin.value.email as string,
+      token: this.formLogin.value.token as string
+    }).subscribe({
       next: (user) => {
-        if(!user || user.token !== this.formLogin.value.token as string) {
-          console.log(user)
-          this.setErrorForm("Senha ou email incorreto!");
-          this.showModal();
-          return;
-        }
-        console.log(user);
         this.loginService.isAllow = true;
         this.redirectHome();
+      },
+      error: (bodyError) => {
+        this.setErrorForm(bodyError.error.error);
+        this.showModal();
       }
     });
   }

@@ -1,16 +1,16 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ProductsService } from '../../../services/products.service';
+import { ProductsService } from '../../../services/products/products.service';
 import { IProduct } from '../../interfaces/IProduct';
-import { ToConvertBase64Service } from '../../../services/to-convert-base64.service';
+import { ToConvertBase64Service } from '../../../services/to-convert-base64/to-convert-base64.service';
 import { ECategorys } from '../../enum/ECategorys';
-import { LocalStorageService } from '../../../services/local-storage.service';
+import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
 import { IUpdateProducts } from '../../interfaces/IUpdateProducts';
-import { NavigateService } from '../../../services/navigate.service';
+import { NavigateService } from '../../../services/navigate/navigate.service';
 import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
 import { IModal } from '../../../shared/interfaces/IModal';
-import { BootstrapUtilsService } from '../../../services/bootstrap-utils.service';
-import { CategoryService } from '../../../services/category.service';
+import { BootstrapUtils } from '../../../utils/bootstrap-utils';
+import { CategoryService } from '../../../services/category/category.service';
 import { ICategory } from '../../interfaces/ICategory';
 
 
@@ -57,7 +57,6 @@ export class FormProductComponent implements OnInit, OnDestroy {
     private formBuilder:FormBuilder,
     private toConvertBase64Service: ToConvertBase64Service,
     private elementRef: ElementRef,
-    private bootstrapUtils: BootstrapUtilsService,
     private categoryService: CategoryService
   ){
   }
@@ -179,11 +178,11 @@ export class FormProductComponent implements OnInit, OnDestroy {
   }
 
   private activedTooltips():void{
-    this.bootstrapUtils.activedTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    BootstrapUtils.activedTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
   }
 
   private disableTooltips():void{
-    this.bootstrapUtils.disableTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    BootstrapUtils.disableTooltips(this.elementRef.nativeElement.querySelectorAll('[data-bs-toggle="tooltip"]'));
   }
 
   private setModalInterface(modalInterface: IModal):void{

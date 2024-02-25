@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { urlBackend } from '../environment/environment';
+import { urlBackend } from '../../environment/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class HttpClientService {
     return this.httpClient.get<T>(`${urlBackend}${urlController}`);
   }
 
-  public post<T>(urlController:string, body:T):Observable<T>{
+  public post<T,U>(urlController:string, body:U):Observable<T>{
     return this.httpClient.post<T>(`${urlBackend}${urlController}`,body);
   }
 

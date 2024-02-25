@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from './http-client.service';
-import { IUser } from '../shared/interfaces/IUser';
+import { HttpClientService } from '../http-client/http-client.service';
+import { IUser } from '../../shared/interfaces/IUser';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class LoginService {
 
 
 
-  public authenticator(email:string):Observable<IUser>{
-    return this.httpClientService.get<IUser>(`/user/${email}`);
+  public authenticator(body: IUser):Observable<string>{
+    return this.httpClientService.post<string,IUser>(`/auth`, body);
   }
 
   public login(){
