@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IUpdatePagination } from '../../../home-page/interfaces/IUpdatePagionation';
+import { IUpdatePagination } from '../../../modules/home-page/interfaces/IUpdatePagionation';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',

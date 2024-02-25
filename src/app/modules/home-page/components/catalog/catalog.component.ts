@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ICategoryWithProducts } from '../../interfaces/ICategoryWithProducts';
-import { ProductsService } from '../../../services/products/products.service';
-import { PaginationUtils } from '../../../utils/pagination.utils';
+import { ProductsService } from '../../../../services/products/products.service';
+import { PaginationUtils } from '../../../../utils/pagination/pagination.utils';
 import { IProduct } from '../../interfaces/IProduct';
 import { IUpdatePagination } from '../../interfaces/IUpdatePagionation';
 

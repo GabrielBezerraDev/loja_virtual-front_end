@@ -4,11 +4,11 @@ import { authLoginGuard } from './guards/auth-guard/auth-login.guard';
 export const routes: Routes = [
   {
     path: "login",
-    loadChildren: () =>  import("./login/login.module").then(m => m.LoginModule)
+    loadChildren: () =>  import("./modules/login/login.module").then(m => m.LoginModule)
   },
   {
     path:"home",
-    loadChildren: () =>  import("./home-page/home-page.module").then(m => m.HomePageModule),
+    loadChildren: () =>  import("./modules/home-page/home-page.module").then(m => m.HomePageModule),
     canActivate: [authLoginGuard]
   },
   {

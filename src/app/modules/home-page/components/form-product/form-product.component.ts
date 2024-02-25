@@ -1,17 +1,18 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ProductsService } from '../../../services/products/products.service';
+import { ProductsService } from '../../../../services/products/products.service';
 import { IProduct } from '../../interfaces/IProduct';
-import { ToConvertBase64Service } from '../../../services/to-convert-base64/to-convert-base64.service';
+import { ToConvertBase64Service } from '../../../../services/to-convert-base64/to-convert-base64.service';
 import { ECategorys } from '../../enum/ECategorys';
-import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
+import { LocalStorageService } from '../../../../services/local-storage/local-storage.service';
 import { IUpdateProducts } from '../../interfaces/IUpdateProducts';
-import { NavigateService } from '../../../services/navigate/navigate.service';
-import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
-import { IModal } from '../../../shared/interfaces/IModal';
-import { BootstrapUtils } from '../../../utils/bootstrap-utils';
-import { CategoryService } from '../../../services/category/category.service';
+import { NavigateService } from '../../../../services/navigate/navigate.service';
+import { ModalComponent } from '../../../../shared/components/modal/modal/modal.component';
+import { IModal } from '../../../../shared/interfaces/IModal';
+import { BootstrapUtils } from '../../../../utils/bootstrap/bootstrap-utils';
+import { CategoryService } from '../../../../services/category/category.service';
 import { ICategory } from '../../interfaces/ICategory';
+import { TokenJwt } from '../../../../utils/token-jwt/token-jwt.utils';
 
 
 

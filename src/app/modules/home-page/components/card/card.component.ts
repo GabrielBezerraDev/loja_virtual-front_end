@@ -1,11 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
+import { LocalStorageService } from '../../../../services/local-storage/local-storage.service';
 import { IProduct } from '../../interfaces/IProduct';
-import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
-import { NavigateService } from '../../../services/navigate/navigate.service';
-import { IModal } from '../../../shared/interfaces/IModal';
-import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
-import { WindowUtils } from '../../../utils/window-utils';
-import { BootstrapUtils } from '../../../utils/bootstrap-utils';
+import { NavigateService } from '../../../../services/navigate/navigate.service';
+import { IModal } from '../../../../shared/interfaces/IModal';
+import { ModalComponent } from '../../../../shared/components/modal/modal/modal.component';
+import { WindowUtils } from '../../../../utils/window/window-utils';
+import { BootstrapUtils } from '../../../../utils/bootstrap/bootstrap-utils';
 
 @Component({
   selector: 'app-card',

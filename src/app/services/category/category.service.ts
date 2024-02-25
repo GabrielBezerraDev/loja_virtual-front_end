@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client/http-client.service';
 import { Observable } from 'rxjs';
-import { ICategory } from '../../home-page/interfaces/ICategory';
+import { ICategory } from '../../modules/home-page/interfaces/ICategory';
 import { urlBackend } from '../../environment/environment';
 
 @Injectable({

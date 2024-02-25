@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigateService } from '../../../services/navigate/navigate.service';
-import { ProductsService } from '../../../services/products/products.service';
+import { NavigateService } from '../../../../services/navigate/navigate.service';
+import { ProductsService } from '../../../../services/products/products.service';
 import { IProduct } from '../../interfaces/IProduct';
 
-import { LocalStorageService } from '../../../services/local-storage/local-storage.service';
+import { LocalStorageService } from '../../../../services/local-storage/local-storage.service';
 import { ICategoryWithProducts } from '../../interfaces/ICategoryWithProducts';
 @Component({
   selector: 'app-page-category',

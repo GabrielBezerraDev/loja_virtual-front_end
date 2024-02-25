@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LoginService } from '../../services/login/login.service';
-import { ModalComponent } from '../../shared/components/modal/modal/modal.component';
-import { IModal } from '../../shared/interfaces/IModal';
-import { NavigateService } from '../../services/navigate/navigate.service';
+import { LoginService } from '../../../services/login/login.service';
+import { ModalComponent } from '../../../shared/components/modal/modal/modal.component';
+import { IModal } from '../../../shared/interfaces/IModal';
+import { NavigateService } from '../../../services/navigate/navigate.service';
+import { TokenJwt } from '../../../utils/token-jwt/token-jwt.utils';
 
 @Component({
   selector: 'app-login',
@@ -83,8 +84,10 @@ export class LoginComponent{
       email: this.formLogin.value.email as string,
       token: this.formLogin.value.token as string
     }).subscribe({
-      next: (user) => {
+      next: (tokenJwt) => {
         this.loginService.isAllow = true;
+        TokenJwt.setToken(tokenJwt);
+        console.log(TokenJwt.getToken());
         this.redirectHome();
       },
       error: (bodyError) => {
